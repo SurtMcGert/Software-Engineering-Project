@@ -20,10 +20,25 @@
         });
 
         const markers = data?.map((d) => {
+            // Places a marker on the map
             const marker = new google.maps.Marker({
                 position: { lat: parseFloat(d.latitude), lng: parseFloat(d.longitude) },
                 map: map
             });
+
+            // Creates an overlay that will be shown over the map when the marker is clicked
+            const info = new google.maps.InfoWindow({
+                content: d.name,
+
+                position: { lat: parseFloat(d.latitude), lng: parseFloat(d.longitude) },
+            });
+
+            google.maps.event.addListener(marker, 'click', function() {
+                info.open({
+                    anchor: marker,
+                    map: map,
+                });
+            })
         });
     }
 
