@@ -4,6 +4,7 @@ from django.conf import settings
 
 import requests
 
+# Home page
 def map(request):
     key = settings.GOOGLE_MAPS_KEY
     context = {
@@ -12,6 +13,9 @@ def map(request):
 
     return render(request, 'map.html', context)
 
+# Accessed at /api/animals
+# Forwards any query parameters to the Ninja Animals API
+# Returns a text JSON response
 def api_animals(request):
     response = requests.get(
         f"https://api.api-ninjas.com/v1/animals?{request.GET.urlencode()}",
