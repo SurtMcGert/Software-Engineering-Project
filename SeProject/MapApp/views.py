@@ -1,7 +1,11 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.conf import settings
 
-# Create your views here.
+def map(request):
+    key = settings.GOOGLE_MAPS_KEY
+    context = {
+        'key': key
+    }
 
-def home(request):
-    return HttpResponse("<h1>Home</h1>")
+    return render(request, 'map.html', context)
