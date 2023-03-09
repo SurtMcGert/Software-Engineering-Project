@@ -29,5 +29,6 @@ def api_animals(request):
         return HttpResponse("something is broken")
 
 def api_pois(request):
-    pois = list(Poi.objects.all())
+    pois = list(Poi.objects.all().values('name', 'latitude', 'longitude'))
+    print(pois)
     return JsonResponse(pois, safe=False)

@@ -21,7 +21,7 @@
 
         const markers = data?.map((d) => {
             const marker = new google.maps.Marker({
-                position: { lat: d.latitude, lng: d.longitude },
+                position: { lat: parseFloat(d.latitude), lng: parseFloat(d.longitude) },
                 map: map
             });
         });
