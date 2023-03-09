@@ -2,3 +2,5 @@ db.sqlite3
 *.pyc
 deployed super user details.txt
 deploymentKey.txt
+
+.env
