@@ -152,5 +152,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 env = environ.Env()
 environ.Env.read_env()
 
-GOOGLE_MAPS_KEY = env('GOOGLE_MAPS_KEY')
-NINJA_API_KEY = env('NINJA_API_KEY')
+#TODO- make these default values something more sensible than xxxxxx lol
+GOOGLE_MAPS_KEY = env('GOOGLE_MAPS_KEY', default='xxxxxx')
+NINJA_API_KEY = env('NINJA_API_KEY', default='xxxxxx')
