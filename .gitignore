@@ -4,3 +4,4 @@ deployed super user details.txt
 deploymentKey.txt
 
 .env
+__pycache__/

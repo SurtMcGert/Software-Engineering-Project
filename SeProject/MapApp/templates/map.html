@@ -3,11 +3,27 @@
 {% load static %}
 
 <script>
-    let map;
-    function initMap() {
-        map = new google.maps.Map(document.getElementById("map"), {
-            center: { lat: -34.397, lng: 150.644 },
-            zoom: 8
+    $(document).ready(function() {
+        $.ajax({
+            url: "/api/pois",
+            method: "GET",
+            success: function (data) {
+                initMap(data);
+            }
+        });
+    });
+
+    function initMap(data) {
+        const map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: 51.2431429, lng: -0.5916511 },
+            zoom: 12
+        });
+
+        const markers = data?.map((d) => {
+            const marker = new google.maps.Marker({
+                position: { lat: d.latitude, lng: d.longitude },
+                map: map
+            });
         });
     }
 

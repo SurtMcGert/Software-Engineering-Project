@@ -1,6 +1,7 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.conf import settings
+from .models import Poi
 
 import requests
 
@@ -26,3 +27,7 @@ def api_animals(request):
         return HttpResponse(response.text)
     else:
         return HttpResponse("something is broken")
+
+def api_pois(request):
+    pois = list(Poi.objects.all())
+    return JsonResponse(pois, safe=False)
