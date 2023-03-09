@@ -153,3 +153,4 @@ env = environ.Env()
 environ.Env.read_env()
 
 GOOGLE_MAPS_KEY = env('GOOGLE_MAPS_KEY')
+NINJA_API_KEY = env('NINJA_API_KEY')
