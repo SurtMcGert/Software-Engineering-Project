@@ -19,13 +19,3 @@ class AnimalsTest(TestCase):
         response = self.client.get('/api/animals')
 
         self.assertEquals(response.status_code, 200)
-        
-class AnimalsTest(TestCase):
-    def setup(self):
-        return
-
-    def test_animals(self):
-        response = self.client.get('/api/animals')
-
-        self.assertEquals(response.status_code, 200)
-
