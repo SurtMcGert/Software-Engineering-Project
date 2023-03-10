@@ -1,7 +1,9 @@
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.conf import settings
 from .models import Poi
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
 
 import requests
 
@@ -13,6 +15,21 @@ def map(request):
     }
 
     return render(request, 'map.html', context)
+
+# Login page
+def sighin(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+        else:
+            messages.error(request, "Username or Password is wrong")
+            return redirect('login')
+    return render(request, "MapApp/login.html")
 
 # Accessed at /api/animals
 # Forwards any query parameters to the Ninja Animals API
