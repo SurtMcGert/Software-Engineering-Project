@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('discussions/', include('DiscussionApp.urls')),
     path('', include('MapApp.urls')),
+    path('auth/', include('AuthApp.urls')),
 ]
