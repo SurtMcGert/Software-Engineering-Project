@@ -1,0 +1,203 @@
+body {
+    font-family: "Merriweather";
+    background-color: #dddddd;
+    margin: 10px;
+    padding: 10px;
+}
+
+h1 {
+    text-transform: uppercase;
+}
+
+/*hr*/
+hr.style1 {
+    border-bottom: 10px dotted #3a3a3a;
+}
+
+hr.style2 {
+    border-bottom: 3px solid #3a3a3a;
+}
+
+.formfield {
+    display: block;
+    border-radius: 20px !important;
+}
+
+.success {
+    background-color: #00ff00;
+}
+
+.error,
+.errorlist {
+    background-color: #ff0000;
+}
+
+/*nav menu*/
+nav {
+    background-color: rgba(105, 105, 105, 0.15) !important;
+    /* backdrop-filter: blur(5px) !important; */
+    border-bottom-right-radius: 20px !important;
+    border-bottom-left-radius: 20px !important;
+    font-family: "Red Rose", cursive !important;
+}
+
+@media print, screen and (min-width: 40em) and (max-width: 63.99875em) {
+    nav {
+        font-size: 13px;
+    }
+}
+
+.input-group.searchbar {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.button.search {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+img {
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+/*main title in middle of home screen*/
+#titles {
+    color: #d1d1d1;
+}
+
+.grid-margin-y {
+    padding-top: 1px !important;
+    padding-bottom: 1px !important;
+    margin: none !important;
+}
+
+/*prevent flickering of styles on dropdown menu*/
+.is-dropdown-submenu-parent > a:after {
+    display: none !important;
+}
+
+/*dropdown menu*/
+.menu li a {
+    border-bottom: 1px solid rgba(0, 0, 0, 0);
+    color: black;
+}
+
+/*dropdown menu hover*/
+.menu li a:hover {
+    border-bottom: 1px solid black !important;
+    color: #bdbdbd !important;
+}
+
+/*all menus*/
+.menu {
+    background: inherit !important;
+    border: 0px !important;
+}
+
+/*each individual drop down item*/
+.menu ul li a {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    line-height: normal;
+    width: 100%;
+    text-align: center;
+    /* border-bottom: 1px dashed black; */
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    padding: 5px !important;
+}
+
+.menu ul li a:hover {
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+}
+
+/*gives first element in a menu top dounded corners*/
+.menu ul li:first-child a {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+/*gives last element in a menu bottom rounded corners*/
+.menu ul li:last-child a {
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+/*makes sure any elements that are not the first in a menu dont get top rounded corners*/
+.menu > li:not(:first-child) > a {
+    border-top-right-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+}
+
+/*makes sure any elements that are not the last in a menu dont get bottom rounded corners*/
+.menu > li:not(:last-child) > a {
+    border-bottom-right-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+}
+
+/*sets the width of a dropdown menu*/
+.dropdown.menu > li > .is-dropdown-submenu {
+    min-width: 100px !important;
+    margin-top: 15px !important;
+}
+
+/*gives childeren of menus the same width as the parent*/
+ul.vertical li a {
+    max-width: 100%;
+}
+
+.icon {
+    min-width: 25px !important;
+}
+
+/*button*/
+.button {
+    border-radius: 50px !important;
+}
+
+/*the three lined menu dropdown*/
+a.threeLineMenu {
+    padding: 0px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+
+.contentArea {
+    position: relative;
+    width: 100%;
+    background: #a8a8a846;
+    border-radius: 20px;
+}
+
+.centerVertical {
+    margin: 0px !important;
+    position: absolute !important;
+    top: 50% !important;
+    -ms-transform: translateY(-50%) !important;
+    transform: translateY(-50%) !important;
+}
+
+.centerHorizontal {
+    margin: auto !important;
+    width: 60% !important;
+    padding: 10px !important;
+}
+
+footer {
+    background-color: rgba(224, 224, 224, 0.548);
+    position: fixed;
+    bottom: 0;
+}
+
+container#licenseContainer {
+    font-size: 13px;
+}
+
+#test {
+    background-color: red !important;
+    color: #4bc015;
+}

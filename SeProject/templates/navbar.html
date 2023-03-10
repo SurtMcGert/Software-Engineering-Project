@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+    {% load static %}
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+
+    <body>
+        <!--header-->
+        <header>
+            <!--navigation bar-->
+            <nav class="top-bar">
+                <div class="grid-x align-middle">
+                    <!--project logo-->
+                    {% comment %} <div class="cell" id="projectLogoCell">
+                        <a href="{% url 'home' %}">
+                            <img
+                                class="show-for-large projectLogo"
+                                src="{% static 'resources/images/logo.png' %}"
+                                alt="project logo"
+                                width="150"
+                                onmouseover="resizeElem(this, this.width + 10)"
+                                onmouseleave="resizeElem(this, this.width - 10)"
+                            />
+                            <img
+                                class="show-for-medium-only projectLogo"
+                                src="{% static 'resources/images/logo.png' %}"
+                                alt="project logo"
+                                width="130"
+                                onmouseover="resizeElem(this, this.width + 10)"
+                                onmouseleave="resizeElem(this, this.width - 10)"
+                            />
+                            <img
+                                class="show-for-small-only projectLogo"
+                                src="{% static 'resources/images/logo.png' %}"
+                                alt="project logo"
+                                width="100"
+                                onmouseover="resizeElem(this, this.width + 10)"
+                                onmouseleave="resizeElem(this, this.width - 10)"
+                            />
+                        </a>
+                    </div> {% endcomment %}
+
+                    <!--dropdown menu-->
+                    <div class="cell shrink">
+                        <!--three line menu for small devices-->
+                        <div class="hide-for-medium">
+                            <ul class="dropdown menu align-center" data-dropdown-menu>
+                                <li class="is-dropdown-submenu-parent">
+                                    <!--three line menu image-->
+                                    <a class="threeLineMenu" href="#">
+                                        <img class="show-for-small-only" src="{% static 'resources/images/three-line-menu-icon-1.jpg' %}" alt="navigation menu" width="35" />
+                                    </a>
+                                    <ul class="vertical dropdown menu align-center text-center" data-dropdown-menu>
+                                        <li>
+                                            <!--user profile-->
+                                            <a href="#" style="font-size: 13px !important">Your Profile</a>
+                                        </li>
+                                        <!--contact-->
+                                        {% comment %} <li>
+                                            <a href="{% url 'contact' %}" style="font-size: 13px !important">Contact</a>
+                                        </li> {% endcomment %}
+                                        <!--login/user options-->
+                                        {% comment %} <li>
+                                            {% if user.is_authenticated %}
+                                            <a href="">{{user.username}}</a>
+                                            {% endif%}
+                                        </li>
+                                        <li>
+                                            {% if user.is_authenticated %}
+                                            <a href="{% url 'logout' %}">Logout</a>
+                                            {% endif%}
+                                        </li>
+                                        <li>
+                                            {% if user.is_authenticated %}
+                                            {% else %}
+                                            <li><a href="{% url 'signupuser' %}">Signup</a></li>
+                                            {% endif%}
+                                        </li>
+                                        <li>
+                                            {% if user.is_authenticated %}
+                                            {% else %}
+                                            <li><a href="{% url 'login' %}">Login</a></li>
+                                            {% endif%}
+                                        </li> {% endcomment %}
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!--proper full dropdown menu-->
+                        <div class="show-for-medium">
+                            <div class="cell auto">
+                                <ul class="dropdown menu align-center expanded" data-dropdown-menu>
+                                    <li class="is-dropdown-submenu-parent">
+                                        <!--user profile-->
+                                        <a href="">Your Profile</a>
+                                    </li>
+                                    <!--contact-->
+                                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="top-bar-right show-for-medium" style="height: 20px !important">
+                    {% comment %} <ul class="menu">
+                        {% if user.is_authenticated %}
+                        <li><a href="">{{user.username}}</a></li>
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                        {% else %}
+                        <li><a href="{% url 'signupuser' %}">Signup</a></li>
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                        {% endif%}
+                    </ul> {% endcomment %}
+                </div>
+            </nav>
+        </header>
+    </body>
+    <script type="text/javascript" src="{% static 'js/foundation.min.js' %}"></script>
+</html>
