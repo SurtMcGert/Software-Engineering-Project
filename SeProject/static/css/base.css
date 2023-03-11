@@ -1,3 +1,4 @@
+/*set body to full screen size, also html because some browsers use the html tag as the base instead of body*/
 html,
 body {
     font-family: "Merriweather";
@@ -7,6 +8,7 @@ body {
     height: 100% !important;
 }
 
+/*h1*/
 h1 {
     text-transform: uppercase;
 }
@@ -20,15 +22,18 @@ hr.style2 {
     border-bottom: 3px solid #3a3a3a;
 }
 
+/*form field areas*/
 .formfield {
     display: block;
     border-radius: 20px !important;
 }
 
+/*success messages*/
 .success {
     background-color: #00ff00;
 }
 
+/*error messages*/
 .error,
 .errorlist {
     background-color: #ff0000;
@@ -40,15 +45,11 @@ nav {
     font-family: "Red Rose", cursive !important;
 }
 
-@media print, screen and (min-width: 40em) and (max-width: 63.99875em) {
+/*changes the font size when the screen gets to a certain size*/
+@media print, screen and (min-width: 0em) and (max-width: 63.99875em) {
     nav {
         font-size: 13px;
     }
-}
-
-img {
-    padding: 0px !important;
-    margin: 0px !important;
 }
 
 /*main title in middle of home screen*/
@@ -56,6 +57,7 @@ img {
     color: #d1d1d1;
 }
 
+/*grid-margin-y*/
 .grid-margin-y {
     padding-top: 1px !important;
     padding-bottom: 1px !important;
@@ -81,7 +83,7 @@ img {
 
 /*all menus*/
 .menu {
-    background: inherit !important;
+    background: transparent !important;
     border: 0px !important;
 }
 
@@ -93,7 +95,7 @@ img {
 
 /*each individual drop down item*/
 .menu ul li a {
-    background-color: rgba(255, 255, 255, 0.15) !important;
+    background-color: transparent !important;
     line-height: normal;
     width: 100%;
     text-align: center;
@@ -104,13 +106,14 @@ img {
     padding: 5px !important;
 }
 
+/*each individual drop down item hover effect*/
 .menu ul li a:hover {
     box-shadow: none !important;
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
 }
 
-/*gives first element in a menu top dounded corners*/
+/*gives first element in a menu top rounded corners*/
 .menu ul li:first-child a {
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
@@ -145,6 +148,7 @@ ul.vertical li a {
     max-width: 100%;
 }
 
+/* icon*/
 .icon {
     min-width: 25px !important;
 }
@@ -161,13 +165,7 @@ a.threeLineMenu {
     padding-right: 10px !important;
 }
 
-.contentArea {
-    position: relative;
-    width: 100%;
-    background: #a8a8a846;
-    border-radius: 20px;
-}
-
+/* class to center vertical */
 .centerVertical {
     margin: 0px !important;
     position: absolute !important;
@@ -176,22 +174,14 @@ a.threeLineMenu {
     transform: translateY(-50%) !important;
 }
 
+/* class to center horizontal */
 .centerHorizontal {
     margin: auto !important;
     width: 60% !important;
     padding: 10px !important;
 }
 
-footer {
-    background-color: rgba(224, 224, 224, 0.548);
-    position: fixed;
-    bottom: 0;
-}
-
-container#licenseContainer {
-    font-size: 13px;
-}
-
+/* three classes to allow the nav to overlap the map */
 .container {
     width: 100%;
     height: 100%;
@@ -199,7 +189,7 @@ container#licenseContainer {
 }
 
 .child2 {
-    width: 20%;
+    width: 50%;
     position: relative;
     top: 15px;
     left: 0;
@@ -211,11 +201,7 @@ container#licenseContainer {
     left: 0;
 }
 
-.test {
-    position: relative;
-    left: 50px;
-}
-
+/* give top-bar class transparent background */
 .top-bar {
     background-color: transparent !important;
 }

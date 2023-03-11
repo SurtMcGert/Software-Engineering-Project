@@ -21,7 +21,7 @@
                                 <div class="cell auto">
                                     <ul class="menu">
                                         <li>
-                                            <!--user profile-->
+                                            <!--map-->
                                             <a href="{% url 'map' %}">Map</a>
                                         </li>
                                         <li>
@@ -34,9 +34,55 @@
                         </div>
                     </div>
                 </div>
-                {% comment %}
-                <div class="top-bar-right show-for-medium" style="height: 20px !important"></div>
-                {% endcomment %}
+
+                <!--login/logout/signup menu-->
+                <div class="top-bar-right">
+                    <div class="grid-container">
+                        <div class="grid-x align-middle align-center">
+                            <div class="cell shrink">
+                                <!--on large screens-->
+                                <div class="show-for-large">
+                                    <div class="cell auto">
+                                        <!--login/logout/signup buttons-->
+                                        <ul class="menu">
+                                            {% if user.is_authenticated %}
+                                            <li><a href="">{{user.username}}</a></li>
+                                            <li><a href="{% url 'logout' %}">Logout</a></li>
+                                            {% else %}
+                                            <li><a href="{% url 'createuser' %}">Signup</a></li>
+                                            <li><a href="{% url 'login' %}">Login</a></li>
+                                            {% endif%}
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!--on small and medium screens-->
+                                <div class="hide-for-large">
+                                    <div class="cell auto">
+                                        <!--login/logout/signup buttons-->
+                                        <ul class="dropdown menu align-center" data-dropdown-menu>
+                                            <li class="is-dropdown-submenu-parent">
+                                                <!--three line menu image-->
+                                                <a href="" class="threeLineMenu">
+                                                    <img src="{% static 'resources/images/menuIcon.png' %}" alt="navigation menu" width="30px" />
+                                                </a>
+                                                <!--login/logout/signup buttons-->
+                                                <ul class="menu">
+                                                    {% if user.is_authenticated %}
+                                                    <li><a href="">{{user.username}}</a></li>
+                                                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                                                    {% else %}
+                                                    <li><a href="{% url 'createuser' %}">Signup</a></li>
+                                                    <li><a href="{% url 'login' %}">Login</a></li>
+                                                    {% endif%}
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </nav>
         </header>
     </body>

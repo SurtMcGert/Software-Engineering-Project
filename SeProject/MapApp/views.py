@@ -5,7 +5,7 @@ from .models import Poi
 
 import requests
 
-# Home page
+# view to render the map page
 def map(request):
     key = settings.GOOGLE_MAPS_KEY
     context = {
@@ -28,6 +28,7 @@ def api_animals(request):
     else:
         return HttpResponse("something is broken")
 
+#view to return points of interest???
 def api_pois(request):
     pois = list(Poi.objects.all().values('name', 'latitude', 'longitude'))
     print(pois)
