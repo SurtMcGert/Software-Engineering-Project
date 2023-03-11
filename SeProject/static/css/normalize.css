@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Red+Rose&display=swap");
+
+#pageHeader {
+    height: 500px;
+    /* background-image: url("{% static 'resources/images/background.jpg' %}"); */
+    background-image: url("/static/resources/images/background.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    font-family: "Red Rose", cursive;
+}
+
+header#pageHeader > div.grid-x {
+    position: relative;
+    top: 40%;
+    transform: translateY(-50%);
+}

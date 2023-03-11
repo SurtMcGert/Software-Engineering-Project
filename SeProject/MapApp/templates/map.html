@@ -1,29 +1,28 @@
-{% extends 'base.html' %}
-{% block content %}
-{% load static %}
-
+{% extends 'base.html' %} {% block content %}{% load static %}
 <script>
-    $(document).ready(function() {
+    //on document ready, initate the google map
+    $(document).ready(function () {
         $.ajax({
             url: "/api/pois",
             method: "GET",
             success: function (data) {
                 initMap(data);
-            }
+            },
         });
     });
 
+    //function to initate the google map
     function initMap(data) {
         const map = new google.maps.Map(document.getElementById("map"), {
             center: { lat: 51.2431429, lng: -0.5916511 },
-            zoom: 12
+            zoom: 12,
         });
 
         const markers = data?.map((d) => {
             // Places a marker on the map
             const marker = new google.maps.Marker({
                 position: { lat: parseFloat(d.latitude), lng: parseFloat(d.longitude) },
-                map: map
+                map: map,
             });
 
             // Creates an overlay that will be shown over the map when the marker is clicked
@@ -33,25 +32,21 @@
                 position: { lat: parseFloat(d.latitude), lng: parseFloat(d.longitude) },
             });
 
-            google.maps.event.addListener(marker, 'click', function() {
+            google.maps.event.addListener(marker, "click", function () {
                 info.open({
                     anchor: marker,
                     map: map,
                 });
-            })
+            });
         });
     }
 
     window.initMap = initMap;
 </script>
 
-<div style="width:100vw;height:100vh">
-    <div id="map" style="height:100%"></div>
+<div style="width: 100vw; height: 100vh">
+    <div id="map" style="height: 100%"></div>
 
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key={{key}}&callback=initMap&v=weekly"
-        defer
-    ></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{key}}&callback=initMap&v=weekly" defer></script>
 </div>
-
 {% endblock content %}
