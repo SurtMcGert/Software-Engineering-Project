@@ -41,13 +41,13 @@ hr.style2 {
 
 /*nav menu*/
 nav {
+    padding: 0 !important;
     background-color: transparent !important;
     font-family: "Helvetica", cursive !important;
 }
 
 /*changes the font size when the screen gets to a certain size*/
-@media print,
-screen and (min-width: 0em) and (max-width: 63.99875em) {
+@media print, screen and (min-width: 0em) and (max-width: 63.99875em) {
     nav {
         font-size: 13px;
     }
@@ -66,7 +66,7 @@ screen and (min-width: 0em) and (max-width: 63.99875em) {
 }
 
 /*prevent flickering of styles on dropdown menu*/
-.is-dropdown-submenu-parent>a:after {
+.is-dropdown-submenu-parent > a:after {
     display: none !important;
 }
 
@@ -88,7 +88,7 @@ screen and (min-width: 0em) and (max-width: 63.99875em) {
     border: 0px !important;
 }
 
-.menu>li {
+.menu > li {
     background-color: rgb(46, 46, 46) !important;
     border-radius: 20px !important;
     margin: 10px;
@@ -127,19 +127,19 @@ screen and (min-width: 0em) and (max-width: 63.99875em) {
 }
 
 /*makes sure any elements that are not the first in a menu dont get top rounded corners*/
-.menu>li:not(:first-child)>a {
+.menu > li:not(:first-child) > a {
     border-top-right-radius: 0px !important;
     border-top-left-radius: 0px !important;
 }
 
 /*makes sure any elements that are not the last in a menu dont get bottom rounded corners*/
-.menu>li:not(:last-child)>a {
+.menu > li:not(:last-child) > a {
     border-bottom-right-radius: 0px !important;
     border-bottom-left-radius: 0px !important;
 }
 
 /*sets the width of a dropdown menu*/
-.dropdown.menu>li>.is-dropdown-submenu {
+.dropdown.menu > li > .is-dropdown-submenu {
     min-width: 100px !important;
     margin-top: 15px !important;
 }
@@ -198,8 +198,17 @@ a.threeLineMenu {
 
 .contentblock {
     position: absolute;
+    width: 100%;
+    height: 100%;
     top: 0;
     left: 0;
+}
+
+.pageArea {
+    position: relative;
+    width: 100%;
+    background: #a8a8a846;
+    border-radius: 20px;
 }
 
 /* give top-bar class transparent background */
