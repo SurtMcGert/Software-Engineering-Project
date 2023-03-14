@@ -15,7 +15,7 @@ import re
 class SignupUser(CreateView):
  model = User
  form_class = SignupForm
- template_name = 'signup.html'
+ template_name = 'registration/signup.html'
  success_url = reverse_lazy('login')
 
 
