@@ -1,7 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.conf import settings
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST, require_GET
 from django.views.decorators.csrf import csrf_exempt
 from django.forms.models import model_to_dict
 from .models import Poi
@@ -60,8 +60,9 @@ def api_create_poi(request):
     poi.save()
     return JsonResponse(model_to_dict(poi), safe=False)
 
-#view to return points of interest???
+# Accessed at /api/pois
+# Returns all of the POIs
+@require_GET
 def api_pois(request):
-    pois = list(Poi.objects.all().values('name', 'latitude', 'longitude'))
-    print(pois)
+    pois = list(Poi.objects.all().values())
     return JsonResponse(pois, safe=False)
