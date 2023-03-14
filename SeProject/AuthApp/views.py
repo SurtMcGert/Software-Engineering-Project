@@ -1,3 +1,4 @@
+#imports
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, SignupForm
@@ -8,8 +9,6 @@ from django.contrib import messages
 from django.views.generic import CreateView
 from django.contrib.auth.models import User
 import re
-
-# Create your views here.
 
 #class based view for signing up a user
 class SignupUser(CreateView):
@@ -66,68 +65,68 @@ class SignupUser(CreateView):
 #     else: # In case of a GET request
 #         return HttpResponseRedirect(fail)
 
-def login(request):
+# def login(request):
     
-    # Make POST requests in the format '/auth/login?fail=<url>&success=<url>
+#     # Make POST requests in the format '/auth/login?fail=<url>&success=<url>
     
-    if 'fail' in request.GET.keys():
-        fail = request.GET['fail']
-    else:
-        fail = '/'
-    if 'success' in request.GET.keys():
-        success = request.GET['success']
-    else:
-        success = '/' 
+#     if 'fail' in request.GET.keys():
+#         fail = request.GET['fail']
+#     else:
+#         fail = '/'
+#     if 'success' in request.GET.keys():
+#         success = request.GET['success']
+#     else:
+#         success = '/' 
 
-    if request.method == 'POST':      
-        usr = authenticate(request, username=request.POST['username'], password=request.POST['password'])
-        if usr is None:
-            messages.add_message(request, messages.ERROR, 'Incorrect login.')
-            return HttpResponseRedirect(fail)
-        else:
-            messages.add_message(request, messages.SUCCESS, 'Logged in as ' + usr.username)
-            login(request, usr)
-            return HttpResponseRedirect(success)
-    else:
-        return HttpResponseRedirect(fail)
+#     if request.method == 'POST':      
+#         usr = authenticate(request, username=request.POST['username'], password=request.POST['password'])
+#         if usr is None:
+#             messages.add_message(request, messages.ERROR, 'Incorrect login.')
+#             return HttpResponseRedirect(fail)
+#         else:
+#             messages.add_message(request, messages.SUCCESS, 'Logged in as ' + usr.username)
+#             login(request, usr)
+#             return HttpResponseRedirect(success)
+#     else:
+#         return HttpResponseRedirect(fail)
 
-@login_required
-def changepw(request):
+# @login_required
+# def changepw(request):
 
-    # Make POST requests in the format '/auth/changepw?fail=<url>&success=<url>
+#     # Make POST requests in the format '/auth/changepw?fail=<url>&success=<url>
 
-    if 'fail' in request.GET.keys():
-        fail = request.GET['fail']
-    else:
-        fail = '/'
-    if 'success' in request.GET.keys():
-        success = request.GET['success']
-    else:
-        success = '/' 
+#     if 'fail' in request.GET.keys():
+#         fail = request.GET['fail']
+#     else:
+#         fail = '/'
+#     if 'success' in request.GET.keys():
+#         success = request.GET['success']
+#     else:
+#         success = '/' 
 
-    if request.method == 'POST':
-        usr = request.user
-        check = authenticate(username=usr.username, password=request.POST['oldpw'])
-        if check is None:
-            messages.add_message(request, messages.ERROR, 'Incorrect password.')
-            return HttpResponseRedirect(fail)
-        else:
-            usr.set_password(request.POST['newpw'])
-            messages.add_message(request, messages.SUCCESS, 'Your password has been changed.')
-            return HttpResponseRedirect(success)
-    else:
-        return HttpResponseRedirect(fail)
+#     if request.method == 'POST':
+#         usr = request.user
+#         check = authenticate(username=usr.username, password=request.POST['oldpw'])
+#         if check is None:
+#             messages.add_message(request, messages.ERROR, 'Incorrect password.')
+#             return HttpResponseRedirect(fail)
+#         else:
+#             usr.set_password(request.POST['newpw'])
+#             messages.add_message(request, messages.SUCCESS, 'Your password has been changed.')
+#             return HttpResponseRedirect(success)
+#     else:
+#         return HttpResponseRedirect(fail)
 
-@login_required
-def logout(request):
+# @login_required
+# def logout(request):
 
-    # Make POST requests in the format '/auth/logout?redir=<url>
+#     # Make POST requests in the format '/auth/logout?redir=<url>
 
-    logout(request)
-    messages.add_message(request, messages.SUCCESS, 'Logged out successfully.')
-    if 'redir' in request.GET.keys():
-        return HttpResponseRedirect(request.get['redir'])
-    else:
-        return HttpResponseRedirect('/')
+#     logout(request)
+#     messages.add_message(request, messages.SUCCESS, 'Logged out successfully.')
+#     if 'redir' in request.GET.keys():
+#         return HttpResponseRedirect(request.get['redir'])
+#     else:
+#         return HttpResponseRedirect('/')
 
 
