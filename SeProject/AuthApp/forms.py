@@ -8,7 +8,7 @@ class LoginForm(forms.Form):
     temp = 1 #delete this, its only here to stop erroring because you cant have a class with nothing in it
 
 # sign up form class
-class SignUpForm(UserCreationForm):
+class SignupForm(UserCreationForm):
  email = forms.EmailField(required=True, label='Email')
  class Meta:
     model = User
