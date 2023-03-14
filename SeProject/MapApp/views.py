@@ -65,5 +65,5 @@ def api_create_poi(request):
 # Returns all of the POIs
 @require_GET
 def api_pois(request):
-    pois = list(Poi.objects.all().values())
+    pois = [p.to_json() for p in Poi.objects.all()]
     return JsonResponse(pois, safe=False)

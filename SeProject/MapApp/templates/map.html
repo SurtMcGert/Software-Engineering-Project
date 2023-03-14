@@ -27,7 +27,11 @@
 
             // Creates an overlay that will be shown over the map when the marker is clicked
             const info = new google.maps.InfoWindow({
-                content: d.name,
+                content: `
+                <h4>${d.name}</h4>
+                <p>${d.slogan}</p>
+                <img src="${d.image_url}" />
+                `,
 
                 position: { lat: parseFloat(d.latitude), lng: parseFloat(d.longitude) },
             });
