@@ -1,58 +1,70 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from django.contrib import messages
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from .forms import LoginForm, SignupForm
+from django.urls import reverse, reverse_lazy
+from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib import messages
+from django.views.generic import CreateView
+from django.contrib.auth.models import User
 import re
 
 # Create your views here.
 
-def createuser(request):
-    
-    # Make POST requests in the format "/auth/createuser?fail=<url>&success=<url>"
+#class based view for signing up a user
+class SignupUser(CreateView):
+ model = User
+ form_class = SignupForm
+ template_name = 'signup.html'
+ success_url = reverse_lazy('login')
 
-    # Can be used to redirect to a desired page after auth
-    if 'fail' in request.GET.keys():
-        fail = request.GET['fail']
-    else:
-        fail = '/'
-    if 'success' in request.GET.keys():
-        success = request.GET['success']
-    else:
-        success = '/'
+
+
+# def signup(request):
     
-    if request.method == 'POST':
-        # Validation
-        if request.POST['password'] != request.POST['confirm']: 
-            messages.add_message(request, messages.ERROR, 'Passwords do not match.')
-            return HttpResponseRedirect(fail)
-        if User.objects.get(username = request.POST['username']) != None:
-            messages.add_message(request, messages.ERROR, 'Username already in use.')
-            return HttpResponseRedirect(fail)
-        if User.objects.get(email = request.POST['email']) != None:
-            messages.add_message(request, messages.ERROR, 'Email already in use.')
-            return HttpResponseRedirect(fail)
-        sym = re.search(r"[^a-zA-Z0-9_]", request.POST['username']) # Usernames can only contain letters, numbers or underscores
-        if sym is not None: 
-            messages.add_message(request, messages.ERROR, 'Username contains disallowed characters.')
-            return HttpResponseRedirect(fail)
-        email = re.search(r"\w+@\w+\.\w+", request.POST['email']) # Check email format
-        if email is None: 
-            messages.add_message(request, messages.ERROR, 'Please input a valid email address.')
-            return HttpResponseRedirect(fail)
+#     # Make POST requests in the format "/auth/createuser?fail=<url>&success=<url>"
+
+#     # Can be used to redirect to a desired page after auth
+#     if 'fail' in request.GET.keys():
+#         fail = request.GET['fail']
+#     else:
+#         fail = '/'
+#     if 'success' in request.GET.keys():
+#         success = request.GET['success']
+#     else:
+#         success = '/'
+    
+#     if request.method == 'POST':
+#         # Validation
+#         if request.POST['password'] != request.POST['confirm']: 
+#             messages.add_message(request, messages.ERROR, 'Passwords do not match.')
+#             return HttpResponseRedirect(fail)
+#         if User.objects.get(username = request.POST['username']) != None:
+#             messages.add_message(request, messages.ERROR, 'Username already in use.')
+#             return HttpResponseRedirect(fail)
+#         if User.objects.get(email = request.POST['email']) != None:
+#             messages.add_message(request, messages.ERROR, 'Email already in use.')
+#             return HttpResponseRedirect(fail)
+#         sym = re.search(r"[^a-zA-Z0-9_]", request.POST['username']) # Usernames can only contain letters, numbers or underscores
+#         if sym is not None: 
+#             messages.add_message(request, messages.ERROR, 'Username contains disallowed characters.')
+#             return HttpResponseRedirect(fail)
+#         email = re.search(r"\w+@\w+\.\w+", request.POST['email']) # Check email format
+#         if email is None: 
+#             messages.add_message(request, messages.ERROR, 'Please input a valid email address.')
+#             return HttpResponseRedirect(fail)
             
-        # Create the user
-        usr = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
-        if usr == None: # Some error occurred
-            messages.add_message(request, messages.ERROR, 'An error occurred. Please try again.')
-            return HttpResponseRedirect(fail)
-        else: # Success
-            messages.add_message(request, messages.SUCCESS, 'Signed up successfully.')
-            login(request, usr)
-            return HttpResponseRedirect(success)
-    else: # In case of a GET request
-        return HttpResponseRedirect(fail)
+#         # Create the user
+#         usr = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
+#         if usr == None: # Some error occurred
+#             messages.add_message(request, messages.ERROR, 'An error occurred. Please try again.')
+#             return HttpResponseRedirect(fail)
+#         else: # Success
+#             messages.add_message(request, messages.SUCCESS, 'Signed up successfully.')
+#             login(request, usr)
+#             return HttpResponseRedirect(success)
+#     else: # In case of a GET request
+#         return HttpResponseRedirect(fail)
 
 def login(request):
     
