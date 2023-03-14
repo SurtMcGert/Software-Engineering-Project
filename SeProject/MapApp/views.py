@@ -3,11 +3,9 @@ from django.shortcuts import render
 from django.conf import settings
 from django.views.decorators.http import require_POST, require_GET
 from django.views.decorators.csrf import csrf_exempt
-from django.forms.models import model_to_dict
 from .models import Poi
 
 import requests
-import json
 
 # view to render the map page
 def map(request):
@@ -30,7 +28,9 @@ def api_create_poi(request):
     if "latitude" not in request.POST:
         return HttpResponse(status=requests.codes.bad)
     if "longitude" not in request.POST:
-        return HttpResponse(statust=requests.codes.bad)
+        return HttpResponse(status=requests.codes.bad)
+    if len(request.FILES) != 1 or "image" not in request.FILES:
+        return HttpResponse(status=requests.codes.bad)
 
     animal_info = requests.get(
         f"https://api.api-ninjas.com/v1/animals?name={request.POST.get('name')}",
@@ -47,7 +47,7 @@ def api_create_poi(request):
     
     animal_info = animal_info[0]
 
-    poi = Poi.objects.create(
+    poi = Poi(
         name=animal_info["name"],
         latitude=request.POST.get("latitude"),
         longitude=request.POST.get("longitude"),
@@ -55,10 +55,11 @@ def api_create_poi(request):
         locations=", ".join(animal_info["locations"]),
         feature=animal_info["characteristics"]["distinctive_feature"],
         slogan=animal_info["characteristics"]["slogan"],
-        habitat="null"
+        habitat="null",
+        image=request.FILES["image"]
     )
     poi.save()
-    return JsonResponse(model_to_dict(poi), safe=False)
+    return JsonResponse(poi.to_json(), safe=False)
 
 # Accessed at /api/pois
 # Returns all of the POIs
