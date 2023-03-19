@@ -1,7 +1,7 @@
 #imports
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from .forms import LoginForm, SignupForm
+from .forms import LoginForm, SignupForm, ChangePassForm
 from django.urls import reverse, reverse_lazy
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
@@ -17,7 +17,28 @@ class SignupUser(CreateView):
  template_name = 'registration/signup.html'
  success_url = reverse_lazy('login')
 
-
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = ChangePassForm(request.POST)
+        if form.is_valid():
+            if form.cleaned_data['newpw'] == form.cleaned_data['confirm']:
+                usr = request.user
+                check = authenticate(username=usr.username, password=form.cleaned_data['oldpw'])
+                if check is None:
+                   messages.add_message(request, messages.ERROR, 'Incorrect password.')
+                else:
+                  usr.set_password(form.cleaned_data['newpw'])
+                  messages.add_message(request, messages.SUCCESS, 'Your password has been changed.')
+                  return HttpResponseRedirect(reverse(index))
+            else:
+                messages.add_message(request, messages.ERROR, 'Passwords do not match.')
+        else:
+            messages.add_message(request, messages.ERROR, 'An error occurred. Please try again.')
+    context = {}
+    form = ChangePassForm()
+    context['form'] = form
+    return render(request, 'registration/change_password.html', context)
 
 # def signup(request):
     
