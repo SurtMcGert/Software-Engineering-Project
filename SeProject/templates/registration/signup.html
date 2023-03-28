@@ -10,6 +10,8 @@
     <body>
         <h2>Enter Your Login Details</h2>
         {% comment %} TODO- ADD THE SIGN UP FORM HERE {% endcomment %}
+        {% csrf_token %}
+        {{ form.as_p }}
     </body>
 </html>
 {% endblock page %}
