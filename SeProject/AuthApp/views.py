@@ -1,14 +1,17 @@
 #imports
+import re
+
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from .forms import LoginForm, SignupForm, ChangePassForm
-from django.urls import reverse, reverse_lazy
-from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib import messages
-from django.views.generic import CreateView
 from django.contrib.auth.models import User
-import re
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import redirect, render
+from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView
+
+from .forms import ChangePassForm, SignupForm
+
 
 #class based view for signing up a user
 class SignupUser(CreateView):
