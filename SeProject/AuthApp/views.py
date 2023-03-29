@@ -34,6 +34,7 @@ class SignupUser(CreateView):
 #view for changing a users password
 @login_required
 def change_password(request):
+    # POST request
     if request.method == 'POST':
         form = ChangePassForm(request.POST)
         if form.is_valid():
@@ -44,12 +45,17 @@ def change_password(request):
                    messages.add_message(request, messages.ERROR, 'Incorrect password.')
                 else:
                   usr.set_password(form.cleaned_data['newpw'])
+                  usr.save()
                   messages.add_message(request, messages.SUCCESS, 'Your password has been changed.')
-                  return HttpResponseRedirect(reverse(index))
+                  if 'next' in request.GET.keys():
+                      return HttpResponseRedirect(request.GET['next'])
+                  else:
+                      return HttpResponseRedirect('/')
             else:
                 messages.add_message(request, messages.ERROR, 'Passwords do not match.')
         else:
             messages.add_message(request, messages.ERROR, 'An error occurred. Please try again.')
+    # GET request
     context = {}
     form = ChangePassForm()
     context['form'] = form
