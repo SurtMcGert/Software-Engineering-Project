@@ -1,6 +1,5 @@
 #imports
 import re
-
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
@@ -9,17 +8,30 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView
-
 from .forms import ChangePassForm, SignupForm
 
 
 #class based view for signing up a user
 class SignupUser(CreateView):
- model = User
- form_class = SignupForm
- template_name = 'registration/signup.html'
- success_url = reverse_lazy('login')
+    model = User
+    form_class = SignupForm
+    template_name = 'registration/signup.html'
+    success_url = reverse_lazy('login')
+    def get_user_id(self):
+        return self.request.user.id
 
+    def post(self, request):
+        # Create a new user
+        # user = self.form.save()
+        user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password1'])
+
+        # Get the id of the user that was just created
+        id = user.id
+
+        # Redirect the user to the login page
+        return redirect(reverse_lazy('createProfile', kwargs={'uid':id}))
+
+#view for changing a users password
 @login_required
 def change_password(request):
     if request.method == 'POST':
