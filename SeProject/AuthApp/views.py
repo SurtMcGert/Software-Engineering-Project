@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
@@ -49,16 +51,32 @@ def changePassword(request):
                     messages.add_message(
                         request, messages.ERROR, 'Incorrect password.')
                 else:
-                    usr.set_password(form.cleaned_data['newpw'])
-                    messages.add_message(
-                        request, messages.SUCCESS, 'Your password has been changed.')
-                    return HttpResponseRedirect(reverse_lazy('map'))
+                    if form.cleaned_data['oldpw'] == form.cleaned_data['newpw']:
+                        messages.add_message(
+                            request, messages.ERROR, 'New password cannot be the same as old password.')
+                    else:
+                        try:
+                            validate = validate_password(
+                                form.cleaned_data['newpw'], user=usr)
+                            usr.set_password(form.cleaned_data['newpw'])
+                            usr.save()
+                            messages.add_message(
+                                request, messages.SUCCESS, 'Your password has been changed.')
+                            if 'next' in request.GET.keys():
+                                return HttpResponseRedirect(request.GET['next'])
+                            else:
+                                return HttpResponseRedirect('/')
+                        except ValidationError as e:
+                            for i in e:
+                                messages.add_message(
+                                    request, messages.ERROR, i)
             else:
                 messages.add_message(
                     request, messages.ERROR, 'Passwords do not match.')
         else:
             messages.add_message(request, messages.ERROR,
                                  'An error occurred. Please try again.')
+    # GET request
     context = {}
     form = ChangePassForm()
     context['form'] = form
