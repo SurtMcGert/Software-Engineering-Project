@@ -2,7 +2,7 @@
 import re
 
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
@@ -42,6 +42,16 @@ def change_password(request):
     form = ChangePassForm()
     context['form'] = form
     return render(request, 'registration/change_password.html', context)
+
+@login_required
+def delete_account(request):
+    if request.method == 'POST':
+        request.user.delete()
+        logout(request)
+        return redirect('map')
+    else:
+        return render(request, 'registration/delete_account.html')
+
 
 # def signup(request):
     
