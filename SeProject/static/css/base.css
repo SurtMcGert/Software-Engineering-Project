@@ -144,6 +144,10 @@ nav {
     margin-top: 15px !important;
 }
 
+/* .dropdown.menu>li.is-dropdown-submenu-parent>a{
+    padding-right:0rem !important;
+} */
+
 /*gives childeren of menus the same width as the parent*/
 ul.vertical li a {
     max-width: 100%;

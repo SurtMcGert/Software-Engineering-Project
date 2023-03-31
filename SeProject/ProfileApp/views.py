@@ -12,25 +12,37 @@ from django.views.generic import CreateView
 from .models import Badge, UserProfile
 
 # view to display a users profile
+
+
 @login_required
 def displayProfile(request):
     context = {}
     user = request.user
-    
-    if user.is_authenticated():
-        profile = get_object_or_404(UserProfile, user = user)
+
+    if user.is_authenticated:
+        profile = get_object_or_404(UserProfile, user=user)
         username = user.username
         badges = profile.badges
-    
-    context['name'] = username
-    context['badges'] = badges
-    return render(request, 'ProfileApp/userProfile.html', context)
+        context['name'] = username
+        context['badges'] = badges
+        return render(request, 'ProfileApp/userProfile.html', context)
+    else:
+        return redirect(reverse_lazy('login'))
 
 
-#view to create a users profile
+# view to create a users profile
 def createProfile(request, uid):
-    user = get_object_or_404(User, id = uid)
-    if UserProfile.objects.filter(user = user).exists():
+    user = get_object_or_404(User, id=uid)
+    if UserProfile.objects.filter(user=user).exists():
         return
-    profile = UserProfile.objects.create(user = user)
+    profile = UserProfile.objects.create(user=user)
     return redirect(reverse_lazy('login'))
+
+# view to delete a users profile
+
+
+def deleteProfile(request, uid):
+    profiles = UserProfile.objects.filter(user__isnull=True)
+    for profile in profiles:
+        profile.delete()
+    return redirect(reverse_lazy('map'))

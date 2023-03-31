@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-#badge model
+# badge model
+
+
 class Badge(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
     description = models.CharField(max_length=200, blank=False, null=False)
@@ -17,17 +19,18 @@ class Badge(models.Model):
             return self.name
 
 
-#user profile model
+# user profile model
 class UserProfile(models.Model):
     id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=False)
+    user = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=False)
     badges = models.ManyToManyField(Badge, blank=True, null=True)
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
     class Meta:
         indexes = [models.Index(fields=['id']), ]
 
         def __str__(self):
-            return self.id
+            return str(self.id)

@@ -26,7 +26,7 @@
                                         </li>
                                         <li>
                                             <!--user profile-->
-                                            <a href="">Your Profile</a>
+                                            <a href="{% url 'displayProfile' %}">Your Profile</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -44,9 +44,15 @@
                                 <div class="show-for-large">
                                     <div class="cell auto">
                                         <!--login/logout/signup buttons-->
-                                        <ul class="menu">
+                                        <ul class="dropdown menu align-center expanded text-center" data-dropdown-menu>
                                             {% if user.is_authenticated %}
-                                            <li><a href="">{{user.username}}</a></li>
+                                            <li class="is-dropdown-submenu-parent text-center">
+                                                <a href="">{{user.username}}</a>
+                                                <ul class="menu align-center text-center">
+                                                    <li><a href="{% url 'changePassword' %}">changePassword</a></li>
+                                                    <li><a href="{% url 'deleteAccount' %}">delete account</a></li>
+                                                </ul>
+                                            </li>
                                             <li><a href="{% url 'logout' %}">Logout</a></li>
                                             {% else %}
                                             <li><a href="{% url 'signup' %}">Signup</a></li>
@@ -66,9 +72,15 @@
                                                     <img src="{% static 'resources/images/menuIcon.png' %}" alt="navigation menu" width="30px" />
                                                 </a>
                                                 <!--login/logout/signup buttons-->
-                                                <ul class="menu">
-                                                    {% if user.is_authenticated %}
-                                                    <li><a href="">{{user.username}}</a></li>
+                                                <ul class="dropdown menu align-center expanded text-center" data-dropdown-menu>
+                                                    {% if user.is_authenticated %} 
+                                                    <li class="is-dropdown-submenu-parent">
+                                                        <a href="">{{user.username}}</a>
+                                                        <ul class="menu align-center text-center">
+                                                            <li><a href="{% url 'changePassword' %}">changePassword</a></li>
+                                                            <li><a href="{% url 'deleteAccount' %}">delete account</a></li>
+                                                        </ul>
+                                                    </li>
                                                     <li><a href="{% url 'logout' %}">Logout</a></li>
                                                     {% else %}
                                                     <li><a href="{% url 'signup' %}">Signup</a></li>
