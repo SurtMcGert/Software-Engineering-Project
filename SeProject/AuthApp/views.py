@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
@@ -42,15 +44,23 @@ def change_password(request):
                 usr = request.user
                 check = authenticate(username=usr.username, password=form.cleaned_data['oldpw'])
                 if check is None:
-                   messages.add_message(request, messages.ERROR, 'Incorrect password.')
+                    messages.add_message(request, messages.ERROR, 'Incorrect password.')
                 else:
-                  usr.set_password(form.cleaned_data['newpw'])
-                  usr.save()
-                  messages.add_message(request, messages.SUCCESS, 'Your password has been changed.')
-                  if 'next' in request.GET.keys():
-                      return HttpResponseRedirect(request.GET['next'])
-                  else:
-                      return HttpResponseRedirect('/')
+                    if form.cleaned_data['oldpw'] == form.cleaned_data['newpw']:
+                        messages.add_message(request, messages.ERROR, 'New password cannot be the same as old password.')
+                    else:
+                        try:
+                            validate = validate_password(form.cleaned_data['newpw'], user=usr)    
+                            usr.set_password(form.cleaned_data['newpw'])
+                            usr.save()
+                            messages.add_message(request, messages.SUCCESS, 'Your password has been changed.')
+                            if 'next' in request.GET.keys():
+                                return HttpResponseRedirect(request.GET['next'])
+                            else:
+                                return HttpResponseRedirect('/')
+                        except ValidationError as e:
+                            for i in e:
+                                messages.add_message(request, messages.ERROR, i)
             else:
                 messages.add_message(request, messages.ERROR, 'Passwords do not match.')
         else:
