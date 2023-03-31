@@ -52,7 +52,7 @@ def changePassword(request):
                     usr.set_password(form.cleaned_data['newpw'])
                     messages.add_message(
                         request, messages.SUCCESS, 'Your password has been changed.')
-                    return HttpResponseRedirect(reverse(index))
+                    return HttpResponseRedirect(reverse_lazy('map'))
             else:
                 messages.add_message(
                     request, messages.ERROR, 'Passwords do not match.')
