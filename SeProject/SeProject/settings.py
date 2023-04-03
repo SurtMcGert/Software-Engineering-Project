@@ -51,8 +51,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'MapApp.apps.MapappConfig',
-    'ProfileApp.apps.ProfileappConfig'
+    'ProfileApp.apps.ProfileappConfig',
+    'DiscussionApp.apps.DiscussionappConfig',
+    'channels'
 ]
+
+ASGI_APPLICATION = 'SeProject.routing.application'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

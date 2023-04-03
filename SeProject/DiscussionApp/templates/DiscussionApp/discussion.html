@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% block page %} {% load static %}
+
+<h2>chat</h2>
+{% for message in messages %}
+<p>{{ message }}</p>
+{% endfor %}
+
+<form action="/chat" method="post">
+    <input type="text" name="message" />
+    <input type="submit" value="Send" />
+</form>
+
+{% endblock page %}
