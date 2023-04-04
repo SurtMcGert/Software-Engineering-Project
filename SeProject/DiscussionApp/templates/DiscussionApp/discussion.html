@@ -2,7 +2,7 @@
 
 <h2>chat</h2>
 {% for message in messages %}
-<p>{{ message }}</p>
+<p>{{ message.user.username }} says: {{ message.content }}</p>
 {% endfor %}
 
 <form action="/chat" method="post">

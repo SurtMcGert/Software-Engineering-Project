@@ -1,12 +1,25 @@
-from django.shortcuts import render
-from django.http import StreamingHttpResponse
-from django.views.generic import View
 from channels.generic.websocket import AsyncWebsocketConsumer
+from django.http import StreamingHttpResponse
+from django.shortcuts import render
+from django.views.generic import View
+from .models import Discussion, Chat
 
-def viewDiscussion(self, request, aid):
-    context = {}
-    context['aid'] = aid
-    return render(request, 'DiscussionApp/discussion.html', context)
+# def viewDiscussion(self, request, aid):
+#     context = {}
+#     context['aid'] = aid
+#     return render(request, 'DiscussionApp/discussion.html', context)
+
+class viewDiscussion(View):
+    def get(self, request, **kwargs):
+        context = {}
+        template = 'DiscussionApp/discussion.html'
+        
+        discussionID = self.kwargs['aid']
+        discussion = Discussion.objects.get(id=discussionID)
+        chats = Chat.objects.filter(discussion=discussionID)
+
+        context = {'messages': chats}
+        return render(request, template, context)
 
 # class ChatConsumer(AsyncWebsocketConsumer):
 #     def connect(self, event):
