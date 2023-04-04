@@ -1,10 +1,10 @@
 {% extends 'base.html' %} {% block page %} {% load static %}
 
-<h2>Change Password</h2>
+<h2>Delete account</h2>
+<h3>Are you sure? This process cannot be reverted<h3>
 <form method="POST" enctype="multipart/form-data">
 	{% csrf_token %}
-	{{ form.as_p }}
-	<button type="submit" class="large button">Change Password</button>
+	<button type="submit" class="large button">Delete account</button>
 </form>
 
 {% endblock page %}

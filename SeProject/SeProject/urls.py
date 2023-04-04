@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('MapApp.urls')),
     path('auth/', include('AuthApp.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('profile/', include('ProfileApp.urls')),
 ]
 
 if settings.DEBUG:
