@@ -23,9 +23,9 @@ class DiscussionConsumer(AsyncJsonWebsocketConsumer):
                 }
                 )
 
-        async def tester_message(self, event):
-            tester = event['tester']
-            await self.send(text_data=json.dumps({'tester': tester,}))
+    async def tester_message(self, event):
+        tester = event['tester']
+        await self.send(text_data=json.dumps({'tester': tester,}))
 
 
     async def disconnect(self, close_code):
