@@ -10,4 +10,20 @@
     <input type="submit" value="Send" />
 </form>
 
+<div id='user-hello'></div>
+{{ aid|json_script:'discussionID' }}
+<script>
+	const discussionID = JSON.parse(document.getElementById('discussionID').textContent);
+	const chatSocket = new WebSocket(
+		'ws://' + window.location.host + '/ws/discussion/' + discussionID + '/'
+		);
+
+	chatSocket.onmessage = function (e) {
+		const data = JSON.parse(e.data);
+		document.querySelector('#user-hello').innerHTML = (data.tester)
+	}
+
+</script>
+
+
 {% endblock page %}
