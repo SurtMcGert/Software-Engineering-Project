@@ -11,7 +11,7 @@ class DiscussionConsumer(AsyncJsonWebsocketConsumer):
         
         await self.channel_layer.group_add(
                 self.discussionGroupName,
-                self.channelName
+                self.channel_name
                 )
         await self.accept()
         
@@ -29,9 +29,10 @@ class DiscussionConsumer(AsyncJsonWebsocketConsumer):
 
 
     async def disconnect(self, close_code):
+        print("disconnect")
         await self.channel_layer.group_discard(
                 self.discussionGroupName,
-                self.channelName
+                self.channel_name
                 )
 
     pass

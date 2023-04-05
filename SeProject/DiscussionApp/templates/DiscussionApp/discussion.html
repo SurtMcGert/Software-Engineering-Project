@@ -17,6 +17,7 @@
     wsURL = "ws://" + window.location.host + "/ws/discussion/" + discussionID + "/";
     console.log("connecting to:   " + wsURL);
     const chatSocket = new WebSocket(wsURL);
+    console.log(chatSocket);
 
     chatSocket.onmessage = function (e) {
         const data = JSON.parse(e.data);
