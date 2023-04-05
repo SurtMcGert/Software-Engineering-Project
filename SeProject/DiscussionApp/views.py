@@ -8,7 +8,7 @@ from .models import Chat, Discussion
 
 def viewDiscussion(request, aid):
     context = {}
-    context['aid'] = aid
+    context['aid'] = str(aid)
     return render(request, 'DiscussionApp/discussion.html', context)
 
 # class viewDiscussion(View):
