@@ -5,6 +5,7 @@ from channels.generic.websocket import AsyncJsonWebsocketConsumer
 
 class DiscussionConsumer(AsyncJsonWebsocketConsumer):
     async def connect(self):
+        print("connecting")
         self.aid = self.scope['url_route']['kwargs']['aid']
         self.discussionGroupName = 'discussion%s' % self.aid
         
@@ -12,7 +13,6 @@ class DiscussionConsumer(AsyncJsonWebsocketConsumer):
                 self.discussionGroupName,
                 self.channelName
                 )
-
         await self.accept()
         
         await self.channel_layer.group_send(

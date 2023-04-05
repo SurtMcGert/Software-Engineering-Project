@@ -10,20 +10,18 @@
     <input type="submit" value="Send" />
 </form>
 
-<div id='user-hello'></div>
+<div id="user-hello"></div>
 {{ aid|json_script:'discussionID' }}
 <script>
-	const discussionID = JSON.parse(document.getElementById('discussionID').textContent);
-	const chatSocket = new WebSocket(
-		'ws://' + window.location.host + '/ws/discussion/' + discussionID + '/'
-		);
+    const discussionID = JSON.parse(document.getElementById("discussionID").textContent);
+    wsURL = "ws://" + window.location.host + "/ws/discussion/" + discussionID + "/";
+    console.log("connecting to:   " + wsURL);
+    const chatSocket = new WebSocket(wsURL);
 
-	chatSocket.onmessage = function (e) {
-		const data = JSON.parse(e.data);
-		document.querySelector('#user-hello').innerHTML = (data.tester)
-	}
-
+    chatSocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        document.querySelector("#user-hello").innerHTML = data.tester;
+    };
 </script>
-
 
 {% endblock page %}
