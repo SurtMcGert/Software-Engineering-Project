@@ -1,15 +1,12 @@
 {% extends 'base.html' %} {% block page %} {% load static %}
 
 <h2>chat</h2>
-{% for message in messages %}
-<p>{{ message.user.username }} says: {{ message.content }}</p>
-{% endfor %}
 
-<div id="chat-messages">
-  {% for chat_message in chat_messages %}
-  <p>{{ chat_message.user.username }}: {{ chat_message.message }} </p>
+<textarea id="chat-text" cols="80" rows="30">
+  {% for chat_message in messages %}
+  {{ chat_message.username }}: {{ chat_message.message }}
   {% endfor %}
-<textarea id="chat-text" cols="80" rows="30"></textarea><br>
+</textarea><br>
 
 <input id="input" type="text" size="80"></br>
 <input id="submit" type="button" value="Send">

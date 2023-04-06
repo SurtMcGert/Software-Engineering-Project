@@ -8,6 +8,8 @@ from .models import ChatMessage
 def viewDiscussion(request, aid):
     context = {}
     context['aid'] = str(aid)
+    messages = ChatMessage.objects.all()
+    context['messages']= messages
     return render(request, 'DiscussionApp/discussion.html', context)
 
 def sendMessage(request):
