@@ -5,6 +5,10 @@
 <p>{{ message.user.username }} says: {{ message.content }}</p>
 {% endfor %}
 
+<div id="chat-messages">
+  {% for chat_message in chat_messages %}
+  <p>{{ chat_message.user.username }}: {{ chat_message.message }} </p>
+  {% endfor %}
 <textarea id="chat-text" cols="80" rows="30"></textarea><br>
 
 <input id="input" type="text" size="80"></br>

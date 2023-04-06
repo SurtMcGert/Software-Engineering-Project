@@ -1,6 +1,9 @@
 import json
 
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
+from channels.auth import AuthMiddlewareStack
+from channels.db import database_sync_to_async
+from .models import ChatMessage
 
 
 class DiscussionConsumer(AsyncJsonWebsocketConsumer):
@@ -36,8 +39,11 @@ class DiscussionConsumer(AsyncJsonWebsocketConsumer):
                 )
 
     async def chat_message(self, event):
-        message = event['message']
         username = event['username']
+        message = event['message']
+
+ #       await database_sync_to_async(ChatMessage(username=username, message=message).save())()
+        await modelSave(username=username, message=message)
 
         await self.send(text_data=json.dumps({
             'message': message,
@@ -45,3 +51,8 @@ class DiscussionConsumer(AsyncJsonWebsocketConsumer):
             }))
 
     pass
+
+@database_sync_to_async
+def modelSave(username, message):
+    model = ChatMessage(username=username, message=message)
+    model.save()
