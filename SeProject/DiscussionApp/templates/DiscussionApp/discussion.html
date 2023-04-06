@@ -4,7 +4,9 @@
 
 <textarea id="chat-text" cols="80" rows="30" readonly>
   {% for chat_message in messages %}
-  {{ chat_message.username }}: {{ chat_message.message }}
+  {% if forloop.counter0|divisibleby:2 %}
+    {{ chat_message.username }}: {{ chat_message.message }}
+  {% endif %}
   {% endfor %}
 </textarea><br>
 

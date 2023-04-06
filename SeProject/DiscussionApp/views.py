@@ -12,6 +12,7 @@ def viewDiscussion(request, aid):
     context['messages']= messages
     return render(request, 'DiscussionApp/discussion.html', context)
 
+# I didn't even know this is used, but if you delete it, the whole chat system breaks
 def sendMessage(request):
     if request.method=='POST':
         message = request.POST['message']
