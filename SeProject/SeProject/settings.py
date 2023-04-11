@@ -51,8 +51,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'MapApp.apps.MapappConfig',
-    'ProfileApp.apps.ProfileappConfig'
+    'ProfileApp.apps.ProfileappConfig',
+    'DiscussionApp.apps.DiscussionappConfig',
+    'channels'
 ]
+
+ASGI_APPLICATION = 'SeProject.routing.application'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -177,3 +181,9 @@ environ.Env.read_env()
 #TODO- make these default values something more sensible than xxxxxx lol
 GOOGLE_MAPS_KEY = env('GOOGLE_MAPS_KEY', default='xxxxxx')
 NINJA_API_KEY = env('NINJA_API_KEY', default='xxxxxx')
+
+CHANNEL_LAYERS = {
+    'default' : {
+        'BACKEND' : 'channels.layers.InMemoryChannelLayer'
+    }
+}

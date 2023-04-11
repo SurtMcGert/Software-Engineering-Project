@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% block page %} {% load static %}
+
+<h2>chat</h2>
+
+<textarea id="chat-text" cols="80" rows="30" readonly>
+  {% for chat_message in messages %}
+  {{ chat_message.username }}: {{ chat_message.message }}
+  {% endfor %}
+</textarea><br>
+
+<input id="input" type="text" size="80"></br>
+<input id="submit" type="button" value="Send">
+
+{{ aid|json_script:'discussionID' }}
+{{ request.user.username|json_script:'user_username' }}
+<script>
+    const user_username = JSON.parse(document.getElementById('user_username').textContent);
+
+    document.querySelector('#submit').onclick = function (e) {
+      const messageInputDom = document.querySelector('#input');
+      const message = messageInputDom.value;
+      chatSocket.send(JSON.stringify({
+        'message': message,
+        'username' : user_username,
+      }));
+      messageInputDom.value = '';
+    }
+
+
+    const discussionID = JSON.parse(document.getElementById("discussionID").textContent);
+    wsURL = "ws://" + window.location.host + "/ws/discussion/" + discussionID + "/";
+    console.log("connecting to:   " + wsURL);
+    const chatSocket = new WebSocket(wsURL);
+    console.log(chatSocket);
+
+    chatSocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        document.querySelector("#chat-text").value += (data.username + ": " + data.message + '\n')
+    };
+</script>
+
+{% endblock page %}
