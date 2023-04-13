@@ -1,6 +1,7 @@
 asgiref==3.6.0
 dj-database-url==1.2.0
 Django==4.1.7
+django-sass-processor==1.2.2
 django-environ==0.10.0
 django-channels==0.7.0
 channels==3.0.5
