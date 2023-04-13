@@ -1,11 +1,10 @@
 import json
 
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
-from channels.auth import AuthMiddlewareStack
 from channels.db import database_sync_to_async
 from .models import ChatMessage
 
-
+# Handles streaming for the chatrooms
 class DiscussionConsumer(AsyncJsonWebsocketConsumer):
     async def connect(self):
         print("connecting")
@@ -30,7 +29,8 @@ class DiscussionConsumer(AsyncJsonWebsocketConsumer):
         message = text_data_json['message']
         username = text_data_json['username']
 
-        await modelSave(username=username, message=message)
+        # Save message to model so they can be retrieved when the page is refreshed
+        await modelSave(username=username, message=message, chatroom=self.aid)
 
         await self.channel_layer.group_send(
                 self.discussionGroupName, {
@@ -52,7 +52,8 @@ class DiscussionConsumer(AsyncJsonWebsocketConsumer):
 
     pass
 
+# Asynchronous calls to the model is not allowed, so we need this function (notice the decorator)
 @database_sync_to_async
-def modelSave(username, message):
-    model = ChatMessage(username=username, message=message)
+def modelSave(username, message, chatroom):
+    model = ChatMessage(username=username, message=message, chatroom=chatroom)
     model.save()

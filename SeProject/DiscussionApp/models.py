@@ -17,10 +17,12 @@ class DiscussionBoard(models.Model):
 #     time = models.DateTimeField(auto_now_add=True) # Time posted
 #     reply = models.ForeignKey(Post, on_delete=models.SET_NULL, null=True) # The post this is a reply to, if any
 
+# A single chat messages
 class ChatMessage(models.Model):
     username = models.TextField() # Taking an actual user requires implementation in routing.py
-    message = models.TextField()
+    message = models.TextField() # The text content of the message
     created_at = models.DateTimeField(auto_now_add=True)
+    chatroom = models.IntegerField(blank=False) # The chatroom is was said in
 
     def __str__(self):
         return self.message
