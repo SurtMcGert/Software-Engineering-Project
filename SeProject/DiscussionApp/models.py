@@ -22,7 +22,7 @@ class ChatMessage(models.Model):
     username = models.TextField() # Taking an actual user requires implementation in routing.py
     message = models.TextField() # The text content of the message
     created_at = models.DateTimeField(auto_now_add=True)
-    chatroom = models.IntegerField(blank=False) # The chatroom is was said in
+    chatroom = models.IntegerField(blank=False, null = True) # The chatroom is was said in
 
     def __str__(self):
         return self.message

@@ -1,8 +1,9 @@
 from django.shortcuts import redirect, render
-
+from django.contrib.auth.decorators import login_required
 from .models import ChatMessage
 
 #view to get the discussion history
+@login_required
 def viewDiscussion(request, aid):
     context = {}
     context['aid'] = str(aid)

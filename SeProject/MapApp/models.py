@@ -16,7 +16,7 @@ class Poi(models.Model):
         return {
             **model_to_dict(
                 self,
-                fields=["name", "latitude", "longitude", "scientific_name", "locations", "feature", "slogan", "habitat"]
+                fields=["id", "name", "latitude", "longitude", "scientific_name", "locations", "feature", "slogan", "habitat"]
             ),
             "image_url": self.image.url
         }

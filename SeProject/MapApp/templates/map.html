@@ -11,12 +11,18 @@
         });
     });
 
+    //function to redirect to another url
+    function redirect(url) {
+        console.log("redirecting");
+        window.location.replace(url);
+    }
+
     //function to initate the google map
     function initMap(data) {
         const map = new google.maps.Map(document.getElementById("map"), {
             center: { lat: 51.2431429, lng: -0.5916511 },
             zoom: 12,
-            disableDefaultUI: true
+            disableDefaultUI: true,
         });
 
         const markers = data?.map((d) => {
@@ -32,6 +38,7 @@
                 <h4>${d.name}</h4>
                 <p>${d.slogan}</p>
                 <img src="${d.image_url}" />
+                <button type="submit" class="medium button" onclick="redirect(&#39;/discussion/${d.id} &#39;)">Discussion</button>
                 `,
 
                 position: { lat: parseFloat(d.latitude), lng: parseFloat(d.longitude) },
