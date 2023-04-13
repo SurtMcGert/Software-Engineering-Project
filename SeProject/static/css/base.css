@@ -1,0 +1,271 @@
+/*set body to full screen size, also html because some browsers use the html tag as the base instead of body*/
+html,
+body {
+    font-family: "Merriweather";
+    background-color: #dddddd;
+    margin: 0;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/*h1*/
+h1 {
+    text-transform: uppercase;
+}
+
+/*hr*/
+hr.style1 {
+    border-bottom: 10px dotted #3a3a3a;
+}
+
+hr.style2 {
+    border-bottom: 3px solid #3a3a3a;
+}
+
+/*form field areas*/
+.formfield {
+    display: block;
+    border-radius: 20px !important;
+}
+
+/*success messages*/
+.success {
+    background-color: #00ff00;
+}
+
+/*error messages*/
+.error,
+.errorlist {
+    background-color: #ff0000;
+}
+
+/*nav menu*/
+nav {
+    padding: 0 !important;
+    background-color: transparent !important;
+    font-family: "Helvetica", cursive !important;
+}
+
+/*changes the font size when the screen gets to a certain size*/
+@media print, screen and (min-width: 0em) and (max-width: 63.99875em) {
+    nav {
+        font-size: 13px;
+    }
+}
+
+/*main title in middle of home screen*/
+#titles {
+    color: #d1d1d1;
+}
+
+/*grid-margin-y*/
+.grid-margin-y {
+    padding-top: 1px !important;
+    padding-bottom: 1px !important;
+    margin: none !important;
+}
+
+/*prevent flickering of styles on dropdown menu*/
+.is-dropdown-submenu-parent > a:after {
+    display: none !important;
+}
+
+/*dropdown menu*/
+.menu li a {
+    border-bottom: 1px solid rgba(255, 255, 255, 0);
+    color: rgb(255, 255, 255);
+}
+
+/*dropdown menu hover*/
+.menu li a:hover {
+    border-bottom: 1px solid rgb(255, 255, 255) !important;
+    color: #bdbdbd !important;
+}
+
+/*all menus*/
+.menu {
+    background: transparent !important;
+    border: 0px !important;
+}
+
+.menu > li {
+    background-color: rgb(46, 46, 46) !important;
+    border-radius: 20px !important;
+    margin: 10px;
+}
+
+/*each individual drop down item*/
+.menu ul li a {
+    background-color: transparent !important;
+    line-height: normal;
+    width: 100%;
+    text-align: center;
+    /* border-bottom: 1px dashed black; */
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    padding: 5px !important;
+}
+
+/*each individual drop down item hover effect*/
+.menu ul li a:hover {
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+}
+
+/*gives first element in a menu top rounded corners*/
+.menu ul li:first-child a {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+/*gives last element in a menu bottom rounded corners*/
+.menu ul li:last-child a {
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+/*makes sure any elements that are not the first in a menu dont get top rounded corners*/
+.menu > li:not(:first-child) > a {
+    border-top-right-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+}
+
+/*makes sure any elements that are not the last in a menu dont get bottom rounded corners*/
+.menu > li:not(:last-child) > a {
+    border-bottom-right-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+}
+
+/*sets the width of a dropdown menu*/
+.dropdown.menu > li > .is-dropdown-submenu {
+    min-width: 100px !important;
+    margin-top: 15px !important;
+}
+
+/* .dropdown.menu>li.is-dropdown-submenu-parent>a{
+    padding-right:0rem !important;
+} */
+
+/*gives childeren of menus the same width as the parent*/
+ul.vertical li a {
+    max-width: 100%;
+}
+
+/* icon*/
+.icon {
+    min-width: 25px !important;
+}
+
+/*button*/
+.button {
+    border-radius: 50px !important;
+}
+
+/*the three lined menu dropdown*/
+a.threeLineMenu {
+    padding: 0px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+
+/* class to center vertical */
+.centerVertical {
+    margin: 0px !important;
+    position: absolute !important;
+    top: 50% !important;
+    -ms-transform: translateY(-50%) !important;
+    transform: translateY(-50%) !important;
+}
+
+/* class to center horizontal */
+.centerHorizontal {
+    margin: auto !important;
+    width: 60% !important;
+    padding: 10px !important;
+}
+
+/* three classes to allow the nav to overlap the map */
+.container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.child2 {
+    width: 50%;
+    position: relative;
+    top: 15px;
+    left: 0;
+}
+
+.contentblock {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.pageArea {
+    position: relative;
+    width: 100%;
+    background: #a8a8a846;
+    border-radius: 20px;
+}
+
+/* give top-bar class transparent background */
+.top-bar {
+    background-color: transparent !important;
+}
+
+.chatMessage {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 20px;
+    background: #af8e8e5b;
+}
+
+#chatHistory {
+    overflow: scroll;
+    width: 100%;
+    max-width: 100%;
+    height: 400px;
+    max-height: 400px;
+    overflow-x: hidden !important;
+}
+
+#messageInput {
+    margin: 0px;
+    margin-top: 10px;
+    border-radius: 20px;
+}
+
+/* scroll bar styles     */
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 20px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    border-radius: 20px;
+}

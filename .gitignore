@@ -1,2 +1,12 @@
 db.sqlite3
 *.pyc
+deployed super user details.txt
+deploymentKey.txt
+
+.env
+env
+__pycache__/
+SeProject/SeProject/__pycache__/settings.cpython-310.pyc
+media/
+suDetails.txt
+personalContributions.txt

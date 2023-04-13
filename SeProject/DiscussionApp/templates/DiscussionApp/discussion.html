@@ -1,0 +1,55 @@
+{% extends 'base.html' %} {% block page %} {% load static %}
+
+<h2>not a chat</h2>
+<div id = "chatHistory" style="overflow:scroll;">
+    {% for chatMessage in messages %}
+    {% include "chatMessage.html" %}
+    {% endfor %}
+</div>
+
+<input id="messageInput" type="text" size="80"></br>
+<button type="submit" id="submit" class="large button">Send</button>
+
+{{ aid|json_script:'discussionID' }}
+{{ request.user.username|json_script:'user_username' }}
+<script>
+    $(function () {
+        scrollToEndOfHistory(1);
+    });
+
+    function scrollToEndOfHistory(time){
+        $('#chatHistory').animate({
+            scrollTop: $('#chatHistory').prop("scrollHeight")
+          }, time);
+    }
+
+    const user_username = JSON.parse(document.getElementById('user_username').textContent);
+
+    document.querySelector('#submit').onclick = function (e) {
+      const messageInputDom = document.querySelector('#messageInput');
+      const message = messageInputDom.value;
+      chatSocket.send(JSON.stringify({
+        'message': message,
+        'username' : user_username,
+      }));
+      messageInputDom.value = '';
+    }
+
+
+    const discussionID = JSON.parse(document.getElementById("discussionID").textContent);
+    wsURL = "ws://" + window.location.host + "/ws/discussion/" + discussionID + "/";
+    console.log("connecting to:   " + wsURL);
+    const chatSocket = new WebSocket(wsURL);
+    console.log(chatSocket);
+
+    chatSocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        message = data.username + ': ' + data.message
+        message = message.replace( /(?![^\n]{1,32}$)([^\n]{1,32})\s/g, '$1\n')
+        html = '<div class="chatMessage">'+ message + '</div>';
+        $("#chatHistory").append(html);
+        scrollToEndOfHistory(2000);
+    };
+</script>
+
+{% endblock page %}

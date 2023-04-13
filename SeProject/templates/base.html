@@ -1,0 +1,59 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--styles-->
+        <link rel="stylesheet" type="text/css" href={% static 'css/base.css' %}> <link rel="stylesheet" type="text/css" href={% static 'css/foundation.min.css' %}>
+
+        <!--favicon-->
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'faviconLightTheme.ico' %}" media="(prefers-color-scheme: light)">
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'faviconDarkTheme.ico' %}" media="(prefers-color-scheme: dark)">
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+        <!--scripts for map-->
+
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css" />
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+        <!--app title-->
+        <title>WildWorld</title>
+    </head>
+
+    <!--body-->
+    <body>
+        <div class="container">
+            <div class="contentblock">
+                <!--content block-->
+                {% block content %} {% endblock content %}
+                <!--normal page block-->
+                <div class="normalPageBlock" style="margin-top: 200px">
+                    <div class="grid-y align-center grid-margin-y">
+                        <div class="cell">
+                            <div class="grid-x align-middle">
+                                <div class="cell">
+                                    <container>
+                                        <div class="pageArea centerHorizontal">{% block page %}{% endblock page %}</div>
+                                    </container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="child2">
+                <!--navbar-->
+                <div>{% include "navbar.html" %}</div>
+            </div>
+        </div>
+    </body>
+    <!--scripts-->
+    <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/what-input.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/foundation.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+</html>
