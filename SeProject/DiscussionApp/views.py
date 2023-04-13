@@ -9,7 +9,8 @@ from .models import ChatMessage
 def viewDiscussion(request, aid):
     context = {}
     context['aid'] = str(aid)
-    messages = ChatMessage.objects.all()
+#    messages = ChatMessage.objects.all()
+    messages = ChatMessage.objects.filter(chatroom=aid)
     context['messages'] = messages
     return render(request, 'DiscussionApp/discussion.html', context)
 

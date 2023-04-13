@@ -30,7 +30,7 @@ class DiscussionConsumer(AsyncJsonWebsocketConsumer):
         message = text_data_json['message']
         username = text_data_json['username']
 
-        await modelSave(username=username, message=message)
+        await modelSave(username=username, message=message, chatroom=self.aid)
 
         await self.channel_layer.group_send(
                 self.discussionGroupName, {
@@ -53,6 +53,6 @@ class DiscussionConsumer(AsyncJsonWebsocketConsumer):
     pass
 
 @database_sync_to_async
-def modelSave(username, message):
-    model = ChatMessage(username=username, message=message)
+def modelSave(username, message, chatroom):
+    model = ChatMessage(username=username, message=message, chatroom=chatroom)
     model.save()

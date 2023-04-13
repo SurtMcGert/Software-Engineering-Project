@@ -21,6 +21,7 @@ class ChatMessage(models.Model):
     username = models.TextField() # Taking an actual user requires implementation in routing.py
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    chatroom = models.IntegerField(blank=False)
 
     def __str__(self):
         return self.message
