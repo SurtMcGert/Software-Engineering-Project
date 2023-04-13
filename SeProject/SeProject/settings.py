@@ -35,7 +35,7 @@ SECRET_KEY = 'django-insecure-*1mf#xb%5qre0$&b^25j2d!jn!b5t-9%(2$vw_z++uk#bq%*1_
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # TODO: ^^^ set to true so that the dev server can serve images
-DEBUG = True
+
 
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
@@ -181,6 +181,7 @@ environ.Env.read_env()
 #TODO- make these default values something more sensible than xxxxxx lol
 GOOGLE_MAPS_KEY = env('GOOGLE_MAPS_KEY', default='xxxxxx')
 NINJA_API_KEY = env('NINJA_API_KEY', default='xxxxxx')
+DEBUG = env('DEBUG', default='False')
 
 CHANNEL_LAYERS = {
     'default' : {
