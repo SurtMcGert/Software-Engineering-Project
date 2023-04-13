@@ -5,7 +5,7 @@ from django.views.generic import View
 
 from .models import ChatMessage
 
-
+#view to get the discussion history
 def viewDiscussion(request, aid):
     context = {}
     context['aid'] = str(aid)
@@ -13,7 +13,7 @@ def viewDiscussion(request, aid):
     context['messages'] = messages
     return render(request, 'DiscussionApp/discussion.html', context)
 
-# I didn't even know this is used, but if you delete it, the whole chat system breaks
+# view to send messages
 def sendMessage(request):
     if request.method=='POST':
         message = request.POST['message']

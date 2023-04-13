@@ -1,23 +1,32 @@
 {% extends 'base.html' %} {% block page %} {% load static %}
 
-<h2>chat</h2>
+<h2>not a chat</h2>
+<div id = "chatHistory" style="overflow:scroll;">
+    {% for chatMessage in messages %}
+    {% include "chatMessage.html" %}
+    {% endfor %}
+</div>
 
-<textarea id="chat-text" cols="80" rows="30" readonly>
-  {% for chat_message in messages %}
-  {{ chat_message.username }}: {{ chat_message.message }}
-  {% endfor %}
-</textarea><br>
-
-<input id="input" type="text" size="80"></br>
-<input id="submit" type="button" value="Send">
+<input id="messageInput" type="text" size="80"></br>
+<button type="submit" id="submit" class="large button">Send</button>
 
 {{ aid|json_script:'discussionID' }}
 {{ request.user.username|json_script:'user_username' }}
 <script>
+    $(function () {
+        scrollToEndOfHistory(1);
+    });
+
+    function scrollToEndOfHistory(time){
+        $('#chatHistory').animate({
+            scrollTop: $('#chatHistory').prop("scrollHeight")
+          }, time);
+    }
+
     const user_username = JSON.parse(document.getElementById('user_username').textContent);
 
     document.querySelector('#submit').onclick = function (e) {
-      const messageInputDom = document.querySelector('#input');
+      const messageInputDom = document.querySelector('#messageInput');
       const message = messageInputDom.value;
       chatSocket.send(JSON.stringify({
         'message': message,
@@ -35,7 +44,11 @@
 
     chatSocket.onmessage = function (e) {
         const data = JSON.parse(e.data);
-        document.querySelector("#chat-text").value += (data.username + ": " + data.message + '\n')
+        message = data.username + ': ' + data.message
+        message = message.replace( /(?![^\n]{1,32}$)([^\n]{1,32})\s/g, '$1\n')
+        html = '<div class="chatMessage">'+ message + '</div>';
+        $("#chatHistory").append(html);
+        scrollToEndOfHistory(2000);
     };
 </script>
 
