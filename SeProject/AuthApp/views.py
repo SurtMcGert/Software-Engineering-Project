@@ -25,7 +25,6 @@ class SignupUser(CreateView):
 
     def post(self, request):
         # Create a new user
-        # user = self.form.save()
         user = User.objects.create_user(
             request.POST['username'], request.POST['email'], request.POST['password1'])
 
@@ -36,8 +35,6 @@ class SignupUser(CreateView):
         return redirect(reverse_lazy('createProfile', kwargs={'uid': id}))
 
 # view for changing a users password
-
-
 @login_required
 def changePassword(request):
     if request.method == 'POST':
