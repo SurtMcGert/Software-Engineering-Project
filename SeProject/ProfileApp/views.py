@@ -14,7 +14,7 @@ from .models import Badge, UserProfile
 # view to display a users profile
 
 
-@login_required
+@login_required 
 def displayProfile(request):
     context = {}
     user = request.user
@@ -39,8 +39,6 @@ def createProfile(request, uid):
     return redirect(reverse_lazy('login'))
 
 # view to delete a users profile
-
-
 def deleteProfile(request, uid):
     profiles = UserProfile.objects.filter(user__isnull=True)
     for profile in profiles:

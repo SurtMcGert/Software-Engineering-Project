@@ -31,7 +31,6 @@ the deployed app can be found [here](https://software-engineering-project-njszg.
 
 ## known issues
 
--   no way to close a point of interest once open
 -   no message to indicate that you must be logged in to access a profile or a discussion
 
 ## Contributors

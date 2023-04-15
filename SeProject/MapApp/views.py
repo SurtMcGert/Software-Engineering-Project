@@ -22,7 +22,7 @@ def map(request):
 # Requires a 'name', 'latitude', and 'longitude' in the body
 @require_POST
 @csrf_exempt # TODO: Remove once in production
-def api_create_poi(request):
+def apiCreatePoi(request):
     if "name" not in request.POST:
         return HttpResponse(status=requests.codes.bad)
     if "latitude" not in request.POST:
@@ -64,6 +64,6 @@ def api_create_poi(request):
 # Accessed at /api/pois
 # Returns all of the POIs
 @require_GET
-def api_pois(request):
+def apiPois(request):
     pois = [p.to_json() for p in Poi.objects.all()]
     return JsonResponse(pois, safe=False)
