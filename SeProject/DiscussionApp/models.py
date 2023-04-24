@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+
 from MapApp.models import Poi
 
 
@@ -24,7 +25,7 @@ class ChatMessage(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     chatroom = models.IntegerField(blank=False, null = True) # The chatroom is was said in
     upvotes = models.IntegerField(default=0)
-    parentMessage = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
+    parentMessage = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
 
-    def __str__(self):
-        return self.message
+#    def __str__(self):
+#        return self.message
