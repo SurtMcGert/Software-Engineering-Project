@@ -23,6 +23,8 @@ class ChatMessage(models.Model):
     message = models.TextField() # The text content of the message
     created_at = models.DateTimeField(auto_now_add=True)
     chatroom = models.IntegerField(blank=False, null = True) # The chatroom is was said in
+    upvotes = models.IntegerField(default=0)
+    parentMessage = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.message
