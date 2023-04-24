@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block page %} {% load static %}
 
-<h2>not a chat</h2>
+<h2>{{name}}</h2>
 <div id = "chatHistory" style="overflow:scroll;">
     {% for chatMessage in messages %}
     {% include "chatMessage.html" %}
