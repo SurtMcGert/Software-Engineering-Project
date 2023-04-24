@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
+from MapApp.models import Poi
 from .models import ChatMessage
 
 #view to get the discussion history
