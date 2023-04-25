@@ -4,17 +4,25 @@
 <h2>{{name}}</h2>
 <div id = "chatHistory" style="overflow:scroll;">
     {% for chatMessage in messages %}
-    {% include "chatMessage.html" with username=chatMessage.username  message=chatMessage.message counter=chatMessage.upvotes|default:"0" id=chatMessage.id%}
+    {% include "chatMessage.html" with username=chatMessage.username  message=chatMessage.message counter=chatMessage.upvotes|default:"0" id=chatMessage.id parent=chatMessage.parentMessage.message|default:" "%}
     {% endfor %}
 </div>
-<div class="replyBox"></div>
+<div class="replyBox" style="display:none;">
+    <div class="grid-x align-middle align-center chatMessage">
+        <div class="replyBoxText cell large-11"></div>
+        <div class="cell auto">
+            <button type="submit" class="tiny button" onclick="endReply()">x</button>
+        </div>
+    </div>
+</div>
 <input id="messageInput" type="text" size="80"></br>
 <button type="submit" id="submit" class="large button">Send</button>
 
 {{ aid|json_script:'discussionID' }}
 {{ request.user.username|json_script:'user_username' }}
 <script>
-    sendingReply = false;
+    sendingReply = false; //whether or not the user is replying to a message
+    replyingToID = 0; //the id of the message tthe user is replying too
     $(function () {
         scrollToEndOfHistory(1);
     });
@@ -30,11 +38,20 @@
     document.querySelector('#submit').onclick = function (e) {
       const messageInputDom = document.querySelector('#messageInput');
       const message = messageInputDom.value;
-      chatSocket.send(JSON.stringify({
-        'message': message,
-        'username' : user_username,
-      }));
+      if(sendingReply){
+        chatSocket.send(JSON.stringify({
+            'message': message,
+            'username' : user_username,
+            'replyID': replyingToID,
+          }));
+      }else{
+        chatSocket.send(JSON.stringify({
+            'message': message,
+            'username' : user_username,
+          }));
+      }
       messageInputDom.value = '';
+      endReply();
     }
 
 
@@ -50,9 +67,10 @@
         message = message.replace( /(?![^\n]{1,32}$)([^\n]{1,32})\s/g, '$1\n')
         html = `{% include "chatMessage.html"%}`;
         html = html.replaceAll("!id!", data.id);
-        html = html.replaceAll("counter", data.upvotes);
-        index = html.indexOf(":")
-        html = html.substring(0, index) + message + html.substring(index+1, html.length)
+        html = html.replaceAll("!counter!", data.upvotes);
+        html = html.replaceAll("!parent!", getMessageContents(data.parentID));
+        index = html.indexOf(":");
+        html = html.substring(0, index) + message + html.substring(index+1, html.length);
         $("#chatHistory").append(html);
         scrollToEndOfHistory(2000);
     };
@@ -119,11 +137,41 @@
 
     //function to reply to the message with the given message id
     function reply(mid){
-        //sendingReply = true;
-        
-        //$(".replyBox").text(html);
+        sendingReply = true;
+        replyingToID = mid;
+        $.ajax({
+            url: "/discussion/getMessage",
+            type: "get",
+            data: {
+                messageID: mid,
+            },
+            success: function (response) {
+                //set the reply box to hold the text of the message you are replying too
+                $(".replyBoxText").text(response.message);
+                $(".replyBox").css("display", "block");
+
+                //give the input bar focus
+                $("#messageInput").focus();
+            },
+        });
     }
 
+    //function to end replying to a message
+    function endReply(){
+        sendingReply = false;
+        $(".replyBox").css("display", "none");
+    }
+
+
+    function getMessageContents(mid){
+        if(mid < 0){
+            return " ";
+        }
+        let content = $(".contentBox"+mid).text();
+        let index = content.indexOf(":");
+        content = content.substring(index+1, content.length);
+        return content;
+    }
 
 </script>
 

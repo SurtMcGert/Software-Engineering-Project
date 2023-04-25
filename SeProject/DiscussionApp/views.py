@@ -57,16 +57,16 @@ class getMessage(LoginRequiredMixin, View):
         messageContent = message.message
         created_at = message.created_at
         upvotes = message.upvotes
-        if message.parentMessage!='null':
-            parentMessage = message.parentMessage
-        else:
-            parentMessage = 'null'
+        try:
+            parentMessageID = message.parentMessage.id
+        except:
+            parentMessageID = -1
 
         return JsonResponse({'username':username,
                              'message':messageContent,
                              'created_at':created_at,
                              'upvotes':upvotes,
-                             'parentMessage':parentMessage}, status=200)
+                             'parentMessage':parentMessageID}, status=200)
 
 
 # Updates the number of upvotes a message has

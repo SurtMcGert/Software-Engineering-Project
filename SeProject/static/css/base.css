@@ -275,9 +275,17 @@ a.threeLineMenu {
 }
 /* the styles for the box that shows the message your replying to*/
 .replyBox {
-    color: #00ff00;
+    color: #1d1d1dde;
     background: #55555583;
     border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/*styles for the box that shows a messages parent message (the message this message is replying to)*/
+.parentMessageBox {
+    color: #3a3a3a9f;
+    font-size: 14px;
 }
 
 #test {

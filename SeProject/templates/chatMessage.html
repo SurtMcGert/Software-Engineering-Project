@@ -1,10 +1,10 @@
 <div class="grid-x chatMessage" id="message{{ id|default:'!id!' }}">
-    <div class="cell large-10">{{ username }}: {{ message }}</div>
+    <div class="cell large-10"><div class="parentMessageBox">{{ parent|default:"!parent!" }}</div><div class="contentBox{{ id|default:"!id!" }}">{{ username }}: {{ message }}</div></div>
     <div class="cell auto">
-        <button type="submit" class="tiny button" onclick="">reply</button>
+        <button type="submit" class="tiny button" onclick="reply({{ id|default:"!id!" }})">reply</button>
     </div>
     <div class="cell auto">
         <button type="submit" class="tiny button" onclick="addRemoveUpvote({{ id|default:"!id!" }})">upvote</button>
-        <div class="upvoteCounter{{ id|default:'!id!' }}">{{ counter|default:"counter" }}</div>
+        <div class="upvoteCounter{{ id|default:'!id!' }}">{{ counter|default:"!counter!" }}</div>
     </div>
 </div>
