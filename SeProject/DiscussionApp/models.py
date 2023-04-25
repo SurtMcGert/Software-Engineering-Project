@@ -21,10 +21,10 @@ class DiscussionBoard(models.Model):
 class ChatMessage(models.Model):
     username = models.TextField() # Taking an actual user requires implementation in routing.py
     message = models.TextField() # The text content of the message
-    created_at = models.DateTimeField(auto_now_add=True)
-    chatroom = models.IntegerField(blank=False, null = True) # The chatroom is was said in
-    upvotes = models.IntegerField(default=0)
-    parentMessage = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
+    created_at = models.DateTimeField(auto_now_add=True) # the time of message creation
+    chatroom = models.IntegerField(blank=False, null = True) # The chatroom it was sent in
+    upvotes = models.IntegerField(default=0) # the number of upvotes on a message
+    parentMessage = models.ForeignKey('self', on_delete=models.CASCADE, null=True) # the parent that this message is a reply to
 
     def __str__(self):
         return self.message

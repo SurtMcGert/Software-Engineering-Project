@@ -273,3 +273,13 @@ a.threeLineMenu {
     background: #555;
     border-radius: 20px;
 }
+/* the styles for the box that shows the message your replying to*/
+.replyBox {
+    color: #00ff00;
+    background: #55555583;
+    border-radius: 20px;
+}
+
+#test {
+    background: #00ff00;
+}

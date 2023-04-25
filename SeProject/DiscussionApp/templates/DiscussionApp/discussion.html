@@ -3,16 +3,17 @@
 <h2>{{name}}</h2>
 <div id = "chatHistory" style="overflow:scroll;">
     {% for chatMessage in messages %}
-    {% include "chatMessage.html" %}
+    {% include "chatMessage.html" with username=chatMessage.username  message=chatMessage.message%}
     {% endfor %}
 </div>
-
+<div class="replyBox"></div>
 <input id="messageInput" type="text" size="80"></br>
 <button type="submit" id="submit" class="large button">Send</button>
 
 {{ aid|json_script:'discussionID' }}
 {{ request.user.username|json_script:'user_username' }}
 <script>
+    sendingReply = false;
     $(function () {
         scrollToEndOfHistory(1);
     });
@@ -46,10 +47,41 @@
         const data = JSON.parse(e.data);
         message = data.username + ': ' + data.message
         message = message.replace( /(?![^\n]{1,32}$)([^\n]{1,32})\s/g, '$1\n')
-        html = '<div class="chatMessage">'+ message + '</div>';
+        html = `{% include "chatMessage.html"%}`;
+        index = html.indexOf(":")
+        html = html.substring(0, index) + message + html.substring(index+1, html.length)
         $("#chatHistory").append(html);
         scrollToEndOfHistory(2000);
     };
+
+    //function to add or remove an upvote from the message with the given id
+    function addRemoveUpvote(mid){
+        const request = {{ request }};
+        const currentUser = request.user;
+        //TODO - make request to chrises view and see if the user has already upvoted
+        hasUpvoated = false
+        if(hasUpvoted){
+            //if the user has already upvoted this message then we remove their vote
+            count = 
+        } else {
+            //if tthe user has not upvoted this message then we add their vote
+            count = 
+        }
+        //TODO - update count with chrises view
+
+        //update the counter on the message
+        $("#message" + mid).text(counter);
+    }
+
+
+    //function to reply to the message with the given message id
+    function reply(mid){
+        sendingReply = true;
+        
+        $(".replyBox").text(html);
+    }
+
+
 </script>
 
 {% endblock page %}

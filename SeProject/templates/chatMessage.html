@@ -1,1 +1,10 @@
-<div class="chatMessage">{{ chatMessage.username }}: {{ chatMessage.message }}</div>
+<div class="grid-x chatMessage" id="message{{ id }}">
+    <div class="cell large-10">{{ username }}: {{ message }}</div>
+    <div class="cell auto">
+        <button type="submit" class="tiny button" onclick="">reply</button>
+    </div>
+    <div class="cell auto">
+        <button type="submit" class="tiny button" onclick="addRemoveUpvote({{ id }})">upvote</button>
+        <div class="upvoteCounter">{{ counter }}</div>
+    </div>
+</div>
