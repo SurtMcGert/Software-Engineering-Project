@@ -25,7 +25,7 @@ def sendMessage(request):
 
 # Returns True if user has upvoted this message
 # Input 'userID' and 'messageID'
-class userUpvotedCheck(View):
+class userUpvotedCheck(LoginRequiredMixin, View):
     def get(self, request):
         userProfileID = request.GET.get('userID')
         messageID = request.GET.get('messageID')
@@ -40,7 +40,7 @@ class userUpvotedCheck(View):
 
 # Returns a ChatMessage object
 # Input 'messageID'
-class getMessage(View):
+class getMessage(LoginRequiredMixin, View):
     def get(self, request):
         messageID =  request.GET.get('messageID')
         message = ChatMessage.objects.get(id=messageID)
@@ -63,7 +63,7 @@ class getMessage(View):
 
 # Updates the number of upvotes a message has
 # Input 'messageID' and 'newUpvotes'
-class updateMessageUpvotes(View):
+class updateMessageUpvotes(LoginRequiredMixin, View):
     def get(self, request):
         messageID = request.GET.get('messageID')
         newUpvotes = request.GET.get('newUpvotes')
