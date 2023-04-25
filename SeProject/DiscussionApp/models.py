@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+
 from MapApp.models import Poi
 
 
@@ -26,5 +27,5 @@ class ChatMessage(models.Model):
     upvotes = models.IntegerField(default=0) # the number of upvotes on a message
     parentMessage = models.ForeignKey('self', on_delete=models.CASCADE, null=True) # the parent that this message is a reply to
 
-    def __str__(self):
-        return self.message
+#    def __str__(self):
+#        return self.message
