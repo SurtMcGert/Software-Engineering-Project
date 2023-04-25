@@ -26,7 +26,7 @@ class UserProfile(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, blank=False)
     badges = models.ManyToManyField(Badge, blank=True, null=True)
-    upvotedMessages = models.ManyToManyField(ChatMessage, null=True)
+    upvotedMessages = models.ManyToManyField(ChatMessage, null=True, blank=True)
 
     def __str__(self):
         return str(self.id)

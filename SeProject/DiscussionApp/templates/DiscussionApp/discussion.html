@@ -1,9 +1,10 @@
 {% extends 'base.html' %} {% block page %} {% load static %}
+{{ request.user.id|json_script:"user_id" }}
 
 <h2>{{name}}</h2>
 <div id = "chatHistory" style="overflow:scroll;">
     {% for chatMessage in messages %}
-    {% include "chatMessage.html" with username=chatMessage.username  message=chatMessage.message%}
+    {% include "chatMessage.html" with username=chatMessage.username  message=chatMessage.message counter=chatMessage.upvotes|default:"0" id=chatMessage.id%}
     {% endfor %}
 </div>
 <div class="replyBox"></div>
@@ -48,6 +49,8 @@
         message = data.username + ': ' + data.message
         message = message.replace( /(?![^\n]{1,32}$)([^\n]{1,32})\s/g, '$1\n')
         html = `{% include "chatMessage.html"%}`;
+        html = html.replaceAll("!id!", data.id);
+        html = html.replaceAll("counter", data.upvotes);
         index = html.indexOf(":")
         html = html.substring(0, index) + message + html.substring(index+1, html.length)
         $("#chatHistory").append(html);
@@ -56,29 +59,69 @@
 
     //function to add or remove an upvote from the message with the given id
     function addRemoveUpvote(mid){
-        const request = {{ request }};
-        const currentUser = request.user;
-        //TODO - make request to chrises view and see if the user has already upvoted
-        hasUpvoated = false
-        if(hasUpvoted){
-            //if the user has already upvoted this message then we remove their vote
-            count = 
-        } else {
-            //if tthe user has not upvoted this message then we add their vote
-            count = 
-        }
-        //TODO - update count with chrises view
+        mid = parseInt(mid);
+        const userID = JSON.parse(document.getElementById('user_id').textContent);
+        //make request to view and see if the user has already upvoted
+        hasUpvoted = false;
+        $.ajax({
+            url: "/discussion/userUpvotedCheck",
+            type: "get",
+            data: {
+                userID: userID,
+                messageID: mid,
+            },
+            success: function (response) {
+                if (response.success == true) {
+                    console.log(`already upvoted`);
+                    hasUpvoted = true;
+                } else {
+                    console.log(`not upvoted`);
+                    hasUpvoted = false;
+                }
 
-        //update the counter on the message
-        $("#message" + mid).text(counter);
+                 //make request to view to get the message information so we can see the number of upvotes it already has
+                count = 0;
+                $.ajax({
+                    url: "/discussion/getMessage",
+                    type: "get",
+                    data: {
+                        messageID: mid,
+                    },
+                    success: function (response) {
+                        count = response.upvotes;
+                        if(hasUpvoted){
+                            //if the user has already upvoted this message then we remove their vote
+                            count -= 1;
+                        } else {
+                            //if the user has not upvoted this message then we add their vote
+                            count += 1; 
+                        }
+                        //TODO - update count with chrises view
+                        $.ajax({
+                            url: "/discussion/updateMessageUpvotes",
+                            type: "get",
+                            data: {
+                                messageID: mid,
+                                newUpvotes: count,
+                                isUpvote: !hasUpvoted,
+                            },
+                            success: function (response) {
+                                //update the counter on the message
+                                $(".upvoteCounter" + mid).text(count);
+                            },
+                        });
+                    },
+                });
+            },
+        });
     }
 
 
     //function to reply to the message with the given message id
     function reply(mid){
-        sendingReply = true;
+        //sendingReply = true;
         
-        $(".replyBox").text(html);
+        //$(".replyBox").text(html);
     }
 
 

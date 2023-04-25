@@ -34,10 +34,11 @@ def sendMessage(request):
 # Input 'userID' and 'messageID'
 class userUpvotedCheck(LoginRequiredMixin, View):
     def get(self, request):
-        userProfileID = request.GET.get('userID')
+        userID = request.GET.get('userID')
         messageID = request.GET.get('messageID')
+        user = request.user
 
-        userProfile = UserProfile.objects.get(id=userProfileID)
+        userProfile = UserProfile.objects.get(user=user)
         message = ChatMessage.objects.get(id=messageID)
 
 
@@ -74,9 +75,18 @@ class updateMessageUpvotes(LoginRequiredMixin, View):
     def get(self, request):
         messageID = request.GET.get('messageID')
         newUpvotes = request.GET.get('newUpvotes')
+        isUpvote = request.GET.get('isUpvote')
+        user = request.user
+        userProfile = UserProfile.objects.get(user=user)
+        
 
         message = ChatMessage.objects.get(id=messageID)
         message.upvotes = newUpvotes
         message.save()
+        if isUpvote == "true":
+            userProfile.upvotedMessages.add(message)
+        else:
+            userProfile.upvotedMessages.remove(message)
+        userProfile.save()
 
         return JsonResponse({'success':True})

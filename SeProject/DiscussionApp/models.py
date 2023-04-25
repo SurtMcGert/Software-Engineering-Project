@@ -20,7 +20,7 @@ class DiscussionBoard(models.Model):
 
 # A single chat messages
 class ChatMessage(models.Model):
-    username = models.TextField() # Taking an actual user requires implementation in routing.py
+    username = models.TextField() # Taking an actual user requires implementation in routing.py so we just have the username of the messages sender
     message = models.TextField() # The text content of the message
     created_at = models.DateTimeField(auto_now_add=True) # the time of message creation
     chatroom = models.IntegerField(blank=False, null = True) # The chatroom it was sent in

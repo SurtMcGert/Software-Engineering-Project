@@ -30,24 +30,30 @@ class DiscussionConsumer(AsyncJsonWebsocketConsumer):
         username = text_data_json['username']
 
         # Save message to model so they can be retrieved when the page is refreshed
-        await modelSave(username=username, message=message, chatroom=self.aid)
+        newMessage = await modelSave(username=username, message=message, chatroom=self.aid)
 
         await self.channel_layer.group_send(
                 self.discussionGroupName, {
                     'type': 'chat_message',
                     'message': message,
                     'username' : username,
+                    'id' : newMessage.id,
+                    'upvotes' : newMessage.upvotes,
                     }
                 )
 
     async def chat_message(self, event):
         username = event['username']
         message = event['message']
+        id = event['id']
+        upvotes = event['upvotes']
 
 
         await self.send(text_data=json.dumps({
             'message': message,
             'username': username,
+            'id' : id,
+            'upvotes' : upvotes,
             }))
 
     pass
@@ -57,3 +63,4 @@ class DiscussionConsumer(AsyncJsonWebsocketConsumer):
 def modelSave(username, message, chatroom):
     model = ChatMessage(username=username, message=message, chatroom=chatroom)
     model.save()
+    return model
