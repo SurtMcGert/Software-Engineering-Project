@@ -67,3 +67,14 @@ def apiCreatePoi(request):
 def apiPois(request):
     pois = [p.to_json() for p in Poi.objects.all()]
     return JsonResponse(pois, safe=False)
+
+
+# view to view the privacy page
+def privacy(request):
+    context = {}
+    return render(request, 'privacy.html', context)
+
+#view to view the assertations page
+def assertations(request):
+    context = {}
+    return render(request, 'assertations.html', context)
