@@ -17,7 +17,7 @@
                         <!--menu-->
                         <div class="cell shrink">
                             <!--proper full menu-->
-                            <div class="show-for-medium">
+                            <div class="show-for-small">
                                 <div class="cell auto">
                                     <ul class="menu">
                                         <li>
@@ -31,12 +31,14 @@
                                         </li>
                                         <li>
                                             <!--user profile-->
-                                            <a href="{% url 'displayProfile' %}"
-                                                ><div class="grid-x align-middle align-center">
-                                                    <div class="cell shrink"><img class="icon" src="{% static 'resources/images/user.png' %}" alt="profile icon" width="15px" /></div>
-                                                    <div class="cell auto">Your Profile</div>
-                                                </div></a
-                                            >
+                                            <div class="show-for-medium">
+                                                <a href="{% url 'displayProfile' %}"
+                                                    ><div class="grid-x align-middle align-center">
+                                                        <div class="cell shrink"><img class="icon" src="{% static 'resources/images/user.png' %}" alt="profile icon" width="15px" /></div>
+                                                        <div class="cell auto">Your Profile</div>
+                                                    </div></a
+                                                >
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
@@ -116,7 +118,7 @@
                                 </div>
                                 <!--on small and medium screens-->
                                 <div class="hide-for-large">
-                                    <div class="cell auto">
+                                    <div class="cell shrink">
                                         <!--login/logout/signup buttons-->
                                         <ul class="dropdown menu align-center" data-dropdown-menu>
                                             <li class="is-dropdown-submenu-parent">
@@ -126,6 +128,12 @@
                                                 </a>
                                                 <!--login/logout/signup buttons-->
                                                 <ul class="dropdown menu align-center expanded text-center" data-dropdown-menu>
+                                                    <li>
+                                                        <!--user profile-->
+                                                        <div class="hide-for-medium">
+                                                            <a href="{% url 'displayProfile' %}">Your Profile</a>
+                                                        </div>
+                                                    </li>
                                                     {% if user.is_authenticated %}
                                                     <li class="is-dropdown-submenu-parent">
                                                         <a href="">{{user.username}}</a>

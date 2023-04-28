@@ -90,6 +90,15 @@ nav {
 .menu {
     background: transparent !important;
     border: 0px !important;
+    max-width: -moz-fit-content !important;
+    max-width: fit-content !important;
+}
+
+/*changes the margin of menu list items when the screen gets small*/
+@media print, screen and (min-width: 0em) and (max-width: 40em) {
+    .menu > li {
+        margin: 0px !important;
+    }
 }
 
 .menu > li {
@@ -308,6 +317,17 @@ footer {
 .footerContent {
     background: #4b4b4b42;
     border-radius: 20px;
+}
+
+.grid-container {
+    /* margin: 0px !important;
+    max-width: -moz-fit-content !important;
+    max-width: fit-content !important; */
+}
+
+.top-bar-right {
+    max-width: fit-content !important;
+    max-width: -moz-fit-content !important;
 }
 
 #test {
