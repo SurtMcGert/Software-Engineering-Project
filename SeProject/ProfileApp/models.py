@@ -2,9 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from DiscussionApp.models import ChatMessage
 
-# badge model
-
-
+# model for achievement badges
 class Badge(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
     description = models.CharField(max_length=200, blank=False, null=False)
@@ -20,7 +18,7 @@ class Badge(models.Model):
             return self.name
 
 
-# user profile model
+# model for user profiles
 class UserProfile(models.Model):
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(

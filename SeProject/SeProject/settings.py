@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     'MapApp.apps.MapappConfig',
     'ProfileApp.apps.ProfileappConfig',
     'DiscussionApp.apps.DiscussionappConfig',
+    'RestAPI.apps.RestapiConfig',
+    'rest_framework',
     'channels'
 ]
 
