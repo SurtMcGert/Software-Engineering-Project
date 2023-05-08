@@ -41,6 +41,10 @@ ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split("
 
 DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "True") == "True"
 
+
+DEFAULT_FROM_EMAIL = "defualt.mail@gmail.com"
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
 # Application definition
 
 INSTALLED_APPS = [

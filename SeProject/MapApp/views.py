@@ -1,9 +1,12 @@
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.conf import settings
 from django.views.decorators.http import require_POST, require_GET
 from django.views.decorators.csrf import csrf_exempt
 from .models import Poi
+from .forms import ContactForm
+from django.core.mail import send_mail, BadHeaderError
+from django.urls import reverse
 
 import requests
 
@@ -78,3 +81,22 @@ def privacy(request):
 def assertations(request):
     context = {}
     return render(request, 'assertations.html', context)
+
+#view to render the contact page
+def contact(request):
+    if request.method == "GET":
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            subject = form.cleaned_data['subject']
+            email = form.cleaned_data['email']
+            message = name + ':\n' + form.cleaned_data['message']
+            try:
+                send_mail(subject, message, email, ['wildWorld@gmail.com'])
+            except BadHeaderError:
+                return HttpResponse("Invalid header found.")
+            return redirect(reverse('map'))
+
+    return render(request, 'contact.html', {"form": form})
