@@ -22,11 +22,13 @@ def map(request):
 # Accessed at /api/poi with a POST request
 # Creates a new POI
 # Fetches information about the POI from the Ninja Animals API
-# Requires a 'name', 'latitude', and 'longitude' in the body
+# Requires a 'name', 'animal_name', 'latitude', and 'longitude' in the body
 @require_POST
 @csrf_exempt # TODO: Remove once in production
 def apiCreatePoi(request):
     if "name" not in request.POST:
+        return HttpResponse(status=requests.codes.bad)
+    if "animal_name" not in request.POST:
         return HttpResponse(status=requests.codes.bad)
     if "latitude" not in request.POST:
         return HttpResponse(status=requests.codes.bad)
@@ -36,7 +38,7 @@ def apiCreatePoi(request):
         return HttpResponse(status=requests.codes.bad)
 
     animal_info = requests.get(
-        f"https://api.api-ninjas.com/v1/animals?name={request.POST.get('name')}",
+        f"https://api.api-ninjas.com/v1/animals?name={request.POST.get('animal_name')}",
         headers={'X-Api-Key': settings.NINJA_API_KEY}
     )
 
@@ -51,7 +53,8 @@ def apiCreatePoi(request):
     animal_info = animal_info[0]
 
     poi = Poi(
-        name=animal_info["name"],
+        name=request.POST.get("name"),
+        animal_name=animal_info["name"],
         latitude=request.POST.get("latitude"),
         longitude=request.POST.get("longitude"),
         scientific_name=animal_info["taxonomy"]["scientific_name"],

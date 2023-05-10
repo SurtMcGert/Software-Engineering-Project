@@ -8,7 +8,7 @@ body {
     height: 100% !important;
 }
 /*images*/
-img {
+.projectImg {
     border-radius: 20px;
 }
 
