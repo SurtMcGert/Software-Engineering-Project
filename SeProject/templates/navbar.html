@@ -17,16 +17,28 @@
                         <!--menu-->
                         <div class="cell shrink">
                             <!--proper full menu-->
-                            <div class="show-for-medium">
+                            <div class="show-for-small">
                                 <div class="cell auto">
                                     <ul class="menu">
                                         <li>
                                             <!--map-->
-                                            <a href="{% url 'map' %}">Map</a>
+                                            <a href="{% url 'map' %}"
+                                                ><div class="grid-x align-middle align-center">
+                                                    <div class="cell shrink"><img class="icon" src="{% static 'resources/images/map.png' %}" alt="map icon" width="15px" /></div>
+                                                    <div class="cell auto">map</div>
+                                                </div></a
+                                            >
                                         </li>
                                         <li>
                                             <!--user profile-->
-                                            <a href="{% url 'displayProfile' %}">Your Profile</a>
+                                            <div class="show-for-medium">
+                                                <a href="{% url 'displayProfile' %}"
+                                                    ><div class="grid-x align-middle align-center">
+                                                        <div class="cell shrink"><img class="icon" src="{% static 'resources/images/user.png' %}" alt="profile icon" width="15px" /></div>
+                                                        <div class="cell auto">Your Profile</div>
+                                                    </div></a
+                                                >
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
@@ -47,23 +59,66 @@
                                         <ul class="dropdown menu align-center expanded text-center" data-dropdown-menu>
                                             {% if user.is_authenticated %}
                                             <li class="is-dropdown-submenu-parent text-center">
-                                                <a href="">{{user.username}}</a>
+                                                <a href=""
+                                                    ><div class="grid-x align-middle align-center">
+                                                        <div class="cell shrink"><img class="icon" src="{% static 'resources/images/user (1).png' %}" alt="account icon" width="15px" /></div>
+                                                        <div class="cell auto">{{user.username}}</div>
+                                                    </div></a
+                                                >
                                                 <ul class="menu align-center text-center">
-                                                    <li><a href="{% url 'changePassword' %}">changePassword</a></li>
-                                                    <li><a href="{% url 'deleteAccount' %}">delete account</a></li>
+                                                    <li>
+                                                        <a href="{% url 'changePassword' %}"
+                                                            ><div class="grid-x align-middle align-center">
+                                                                <div class="cell shrink"><img class="icon" src="{% static 'resources/images/password.png' %}" alt="password icon" width="15px" /></div>
+                                                                <div class="cell auto">Change Password</div>
+                                                            </div></a
+                                                        >
+                                                    </li>
+
+                                                    <li>
+                                                        <a href="{% url 'deleteAccount' %}"
+                                                            ><div class="grid-x align-middle align-center">
+                                                                <div class="cell shrink"><img class="icon" src="{% static 'resources/images/delete.png' %}" alt="delete icon" width="15px" /></div>
+                                                                <div class="cell auto">Delete Account</div>
+                                                            </div></a
+                                                        >
+                                                    </li>
                                                 </ul>
                                             </li>
-                                            <li><a href="{% url 'logout' %}">Logout</a></li>
-                                            {% else %}
-                                            <li><a href="{% url 'signup' %}">Signup</a></li>
-                                            <li><a href="{% url 'login' %}">Login</a></li>
-                                            {% endif%}
+                                            <li>
+                                                <a href="{% url 'logout' %}"
+                                                    ><div class="grid-x align-middle align-center">
+                                                        <div class="cell shrink"><img class="icon" src="{% static 'resources/images/logout.png' %}" alt="logout icon" width="15px" /></div>
+                                                        <div class="cell auto">Logout</div>
+                                                    </div></a
+                                                >
+                                                {% else %}
+                                            </li>
+
+                                            <li>
+                                                <a href="{% url 'signup' %}"
+                                                    ><div class="grid-x align-middle align-center">
+                                                        <div class="cell shrink"><img class="icon" src="{% static 'resources/images/add-user.png' %}" alt="signup icon" width="15px" /></div>
+                                                        <div class="cell auto">Signup</div>
+                                                    </div></a
+                                                >
+                                            </li>
+
+                                            <li>
+                                                <a href="{% url 'login' %}"
+                                                    ><div class="grid-x align-middle align-center">
+                                                        <div class="cell shrink"><img class="icon" src="{% static 'resources/images/login.png' %}" alt="login icon" width="15px" /></div>
+                                                        <div class="cell auto">Login</div>
+                                                    </div></a
+                                                >
+                                                {% endif%}
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
                                 <!--on small and medium screens-->
                                 <div class="hide-for-large">
-                                    <div class="cell auto">
+                                    <div class="cell shrink">
                                         <!--login/logout/signup buttons-->
                                         <ul class="dropdown menu align-center" data-dropdown-menu>
                                             <li class="is-dropdown-submenu-parent">
@@ -73,7 +128,13 @@
                                                 </a>
                                                 <!--login/logout/signup buttons-->
                                                 <ul class="dropdown menu align-center expanded text-center" data-dropdown-menu>
-                                                    {% if user.is_authenticated %} 
+                                                    <li>
+                                                        <!--user profile-->
+                                                        <div class="hide-for-medium">
+                                                            <a href="{% url 'displayProfile' %}">Your Profile</a>
+                                                        </div>
+                                                    </li>
+                                                    {% if user.is_authenticated %}
                                                     <li class="is-dropdown-submenu-parent">
                                                         <a href="">{{user.username}}</a>
                                                         <ul class="menu align-center text-center">

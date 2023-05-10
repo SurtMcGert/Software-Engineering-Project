@@ -7,8 +7,8 @@
         <link rel="stylesheet" type="text/css" href={% static 'css/base.css' %}> <link rel="stylesheet" type="text/css" href={% static 'css/foundation.min.css' %}>
 
         <!--favicon-->
-        <link rel="shortcut icon" type="image/x-icon" href="{% static 'faviconLightTheme.ico' %}" media="(prefers-color-scheme: light)">
-        <link rel="shortcut icon" type="image/x-icon" href="{% static 'faviconDarkTheme.ico' %}" media="(prefers-color-scheme: dark)">
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'faviconLightTheme.ico' %}" media="(prefers-color-scheme: light)" />
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'faviconDarkTheme.ico' %}" media="(prefers-color-scheme: dark)" />
 
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -48,6 +48,18 @@
             <div class="child2">
                 <!--navbar-->
                 <div>{% include "navbar.html" %}</div>
+                <!--footer-->
+                <footer>
+                    <div class="grid-y align-center grid-margin-y">
+                        <div class="cell shrink">
+                            <div class="grid-x align-middle align-center">
+                                <div class="cell shrink">
+                                    <div class="footerContent"><div>{% include "footer.html" %}</div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
             </div>
         </div>
     </body>

@@ -1,9 +1,10 @@
 from django.contrib.auth.models import User
 from django.db import models
+
 from MapApp.models import Poi
 
 
-# Create your models here.
+# model for a discussion board
 class DiscussionBoard(models.Model):
     poi = models.ForeignKey(Poi, on_delete=models.CASCADE) # The point of interest this discussion board is for
     subscribers = models.ManyToManyField(User) # Users who are subscribed to the posts on this board
@@ -17,12 +18,14 @@ class DiscussionBoard(models.Model):
 #     time = models.DateTimeField(auto_now_add=True) # Time posted
 #     reply = models.ForeignKey(Post, on_delete=models.SET_NULL, null=True) # The post this is a reply to, if any
 
-# A single chat messages
+# model for each chat message
 class ChatMessage(models.Model):
-    username = models.TextField() # Taking an actual user requires implementation in routing.py
+    username = models.TextField() # Taking an actual user requires implementation in routing.py so we just have the username of the messages sender
     message = models.TextField() # The text content of the message
-    created_at = models.DateTimeField(auto_now_add=True)
-    chatroom = models.IntegerField(blank=False, null = True) # The chatroom is was said in
+    created_at = models.DateTimeField(auto_now_add=True) # the time of message creation
+    chatroom = models.IntegerField(blank=False, null = True) # The chatroom it was sent in
+    upvotes = models.IntegerField(default=0) # the number of upvotes on a message
+    parentMessage = models.ForeignKey('self', on_delete=models.CASCADE, null=True) # the parent that this message is a reply to
 
-    def __str__(self):
-        return self.message
+#    def __str__(self):
+#        return self.message

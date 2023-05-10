@@ -26,6 +26,7 @@ urlpatterns = [
     path('auth/', include('AuthApp.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('profile/', include('ProfileApp.urls')),
+    path('restapi/', include('RestAPI.urls')),
 ]
 
 if settings.DEBUG:

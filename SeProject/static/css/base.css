@@ -7,6 +7,10 @@ body {
     width: 100% !important;
     height: 100% !important;
 }
+/*images*/
+img {
+    border-radius: 20px;
+}
 
 /*h1*/
 h1 {
@@ -78,7 +82,7 @@ nav {
 
 /*dropdown menu hover*/
 .menu li a:hover {
-    border-bottom: 1px solid rgb(255, 255, 255) !important;
+    /* border-bottom: 1px solid rgb(255, 255, 255) !important; */
     color: #bdbdbd !important;
 }
 
@@ -86,12 +90,23 @@ nav {
 .menu {
     background: transparent !important;
     border: 0px !important;
+    max-width: -moz-fit-content !important;
+    max-width: fit-content !important;
+}
+
+/*changes the margin of menu list items when the screen gets small*/
+@media print, screen and (min-width: 0em) and (max-width: 40em) {
+    .menu > li {
+        margin: 0px !important;
+    }
 }
 
 .menu > li {
     background-color: rgb(46, 46, 46) !important;
     border-radius: 20px !important;
     margin: 10px;
+    max-width: -moz-fit-content;
+    max-width: fit-content;
 }
 
 /*each individual drop down item*/
@@ -155,7 +170,11 @@ ul.vertical li a {
 
 /* icon*/
 .icon {
-    min-width: 25px !important;
+    /* min-width: 25px !important; */
+    border-radius: 0px !important;
+    width: 20px !important;
+    max-width: 20px !important;
+    margin: 2px;
 }
 
 /*button*/
@@ -268,4 +287,49 @@ a.threeLineMenu {
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
     border-radius: 20px;
+}
+/* the styles for the box that shows the message your replying to*/
+.replyBox {
+    color: #1d1d1dde;
+    background: #55555583;
+    border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/*styles for the box that shows a messages parent message (the message this message is replying to)*/
+.parentMessageBox {
+    color: #3a3a3a9f;
+    font-size: 14px;
+}
+
+/*styles for the footer*/
+footer {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    height: 30px;
+    width: 100%;
+    background: #ffffff00;
+    font-size: 15px;
+}
+
+.footerContent {
+    background: #4b4b4b42;
+    border-radius: 20px;
+}
+
+.grid-container {
+    /* margin: 0px !important;
+    max-width: -moz-fit-content !important;
+    max-width: fit-content !important; */
+}
+
+.top-bar-right {
+    max-width: fit-content !important;
+    max-width: -moz-fit-content !important;
+}
+
+#test {
+    background: #00ff00;
 }
