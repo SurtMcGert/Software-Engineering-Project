@@ -5,10 +5,20 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Login</title>
     </head>
     <body>
         <h2>{{name}}</h2>
+        <div class="grid-x align-middle align-center grid-margin-x">
+            {% for badge in badges %}
+            <div class="cell medium-auto">
+                <div class="grid-y">
+                    <div class="cell small-auto text-center"><h5>{{badge.name}}</h5></div>
+                    <div class="cell small-auto text-center"><img class="projectImg" src="{{badge.image.url}}" alt="badge" width="150px" /></div>
+                    <div class="cell small-auto text-center"><p>{{badge.description}}</p></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </body>
 </html>
 {% endblock page %}
