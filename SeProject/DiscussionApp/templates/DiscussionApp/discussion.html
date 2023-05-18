@@ -56,7 +56,7 @@
 
 
     const discussionID = JSON.parse(document.getElementById("discussionID").textContent);
-    wsURL = "ws://" + window.location.host + "/ws/discussion/" + discussionID + "/";
+    wsURL = "wss://" + window.location.host + "/ws/discussion/" + discussionID + "/";
     console.log("connecting to:   " + wsURL);
     const chatSocket = new WebSocket(wsURL);
     console.log(chatSocket);
