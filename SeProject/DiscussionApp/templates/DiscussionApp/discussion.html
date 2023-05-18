@@ -52,11 +52,11 @@
       }
       messageInputDom.value = '';
       endReply();
-    }
+    }   
 
 
     const discussionID = JSON.parse(document.getElementById("discussionID").textContent);
-    wsURL = "wss://" + window.location.host + "/ws/discussion/" + discussionID + "/";
+    wsURL = "ws://" + window.location.host + "/ws/discussion/" + discussionID + "/";
     console.log("connecting to:   " + wsURL);
     const chatSocket = new WebSocket(wsURL);
     console.log(chatSocket);
