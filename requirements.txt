@@ -16,3 +16,4 @@ tzdata==2022.7
 WhiteNoise==6.4.0
 Pillow==9.4.0
 Werkzeug==2.2.3
+uvicorn==0.22.0
