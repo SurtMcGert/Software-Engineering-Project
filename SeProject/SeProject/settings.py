@@ -193,11 +193,13 @@ DEBUG = env('DEBUG', default='False')
 
 ASGI_APPLICATION = 'SeProject.routing.application'
 ASGI_THREADS= env('ASGI_THREADS', default=5)
-CHANNEL_LAYERS = {
-    'default' : {
-        'BACKEND' : 'channels.layers.InMemoryChannelLayer'
-    }
-}
+# CHANNEL_LAYERS = {
+#     'default' : {
+#         'BACKEND' : 'channels.layers.InMemoryChannelLayer'
+#     }
+# }
+
+CHANNEL_LAYERS = { "default": { "BACKEND": "channels_redis.core.RedisChannelLayer", "CONFIG": { "hosts": "redis://:pd6f9ab8daaccd31c943cd92422c6d67720a1658901591ce8a8f3497d07f7f0e1@ec2-54-216-51-215.eu-west-1.compute.amazonaws.com:16869" }, }, }
 
 #configure for heroku
 import django_on_heroku
