@@ -1,1 +1,1 @@
-web: gunicorn SeProject/SeProject.wsgi
+web: gunicorn SeProject/SeProject.wsgi --preload
