@@ -1,1 +1,1 @@
-web: cd SeProject && gunicorn SeProject.wsgi --preload
+web: cd SeProject && uvicorn SeProject.wsgi --preload --port 6754
