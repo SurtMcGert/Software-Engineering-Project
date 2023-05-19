@@ -1,1 +1,1 @@
-web: gunicorn SeProject.wsgi
+web: gunicorn SeProject/SeProject.wsgi
