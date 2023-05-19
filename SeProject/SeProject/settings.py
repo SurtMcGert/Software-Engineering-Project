@@ -192,6 +192,7 @@ NINJA_API_KEY = env('NINJA_API_KEY', default='xxxxxx')
 DEBUG = env('DEBUG', default='False')
 
 ASGI_APPLICATION = 'SeProject.routing.application'
+ASGI_THREADS= env('ASGI_THREADS', default=5)
 CHANNEL_LAYERS = {
     'default' : {
         'BACKEND' : 'channels.layers.InMemoryChannelLayer'
