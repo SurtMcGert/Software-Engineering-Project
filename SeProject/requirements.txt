@@ -4,6 +4,7 @@ Django==4.1.7
 django-sass-processor==1.2.2
 django-environ==0.10.0
 django-channels==0.7.0
+django-extensions==3.2.1
 djangorestframework==3.14.0
 channels==3.0.5
 environ==1.0
@@ -13,3 +14,4 @@ sqlparse==0.4.3
 tzdata==2022.7
 WhiteNoise==6.4.0
 Pillow==9.4.0
+Werkzeug==2.2.3
