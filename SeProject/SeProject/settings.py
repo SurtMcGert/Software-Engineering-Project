@@ -59,7 +59,8 @@ INSTALLED_APPS = [
     'DiscussionApp.apps.DiscussionappConfig',
     'RestAPI.apps.RestapiConfig',
     'rest_framework',
-    'channels'
+    'channels',
+    "django_extensions"
 ]
 
 
