@@ -37,7 +37,8 @@ SECRET_KEY = 'django-insecure-*1mf#xb%5qre0$&b^25j2d!jn!b5t-9%(2$vw_z++uk#bq%*1_
 # TODO: ^^^ set to true so that the dev server can serve images
 
 
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
+# ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
+ALLOWED_HOSTS="*"
 
 DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "True") == "True"
 
