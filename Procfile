@@ -1,1 +1,1 @@
-web: cd SeProject && uvicorn SeProject.wsgi --preload --port 6754
+web: cd SeProject && uvicorn SeProject.asgi:application --preload --limit-max-requests=1200 --port 6754
