@@ -197,3 +197,7 @@ CHANNEL_LAYERS = {
         'BACKEND' : 'channels.layers.InMemoryChannelLayer'
     }
 }
+
+#configure for heroku
+import django_on_heroku
+django_on_heroku.settings(locals())
