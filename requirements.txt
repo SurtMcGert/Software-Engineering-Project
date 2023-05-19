@@ -5,6 +5,7 @@ django-sass-processor==1.2.2
 django-environ==0.10.0
 django-channels==0.7.0
 django-extensions==3.2.1
+django-on-heroku==1.1.2
 djangorestframework==3.14.0
 channels==3.0.5
 environ==1.0
