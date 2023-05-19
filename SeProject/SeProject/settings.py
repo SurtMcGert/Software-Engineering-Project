@@ -200,7 +200,7 @@ ASGI_THREADS= env('ASGI_THREADS', default=5)
 #     }
 # }
 
-CHANNEL_LAYERS = { "default": { "BACKEND": "channels_redis.core.RedisChannelLayer", "CONFIG": { "hosts": [(os.environ.get('REDIS_HOST', 'localhost'),6379)] }, }, }
+CHANNEL_LAYERS = { "default": { "BACKEND": "channels_redis.core.RedisChannelLayer", "CONFIG": { "hosts": [(os.environ.get('REDIS_URL', 'localhost'),16869)] }, }, }
 
 #configure for heroku
 import django_on_heroku
